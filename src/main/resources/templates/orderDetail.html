@@ -1,0 +1,135 @@
+<th:block th:replace="~{/common/commonHead}"></th:block>
+<body>
+<th:block th:replace="~{/common/commonHeader}"></th:block>
+<div class="myPageContent" data-items="2">
+    <div class="myPageLeftSideContent">
+        <div class="leftSideTop">
+            <div class="userProfileImg">
+                <img src="/file/img/testImg.jpg" alt="">
+            </div>
+            <div class="userName">회원명</div>
+        </div>
+        <hr class="line">
+        <div class="leftSideMenuList">
+            <div class="" onclick="moveToPage('/myPage/shoppingCart')">장바구니</div>
+            <div class="" onclick="moveToPage('/myPage/wishList')">찜목록</div>
+            <div class="selected" onclick="moveToPage('/myPage/order/list')">주문</div>
+            <div class="" onclick="moveToPage('/myPage/order/1')">문의</div>
+            <div class="" onclick="moveToPage('/')">회원정보변경</div>
+        </div>
+    </div>
+    <div class="myPageCenterContent">
+        <div class="topContent">
+            <div class="title">주문 상세</div>
+            <div class="btnGroup">
+                <button class="btn btnBlack" onclick="moveToPage('/myPage/order/list')">주문 목록</button>
+            </div>
+        </div>
+        <hr class="line">
+        <div class="orderDetailContainer">
+            <div class="infoText">
+                <div class="key">주문번호</div>
+                <div class="value">YYYYMMDD-XXXXXXXX</div>
+            </div>
+            <div class="infoText">
+                <div class="key">주문일시</div>
+                <div class="value">YYYY-MM-DD HH:MM:SS</div>
+            </div>
+            <div class="infoText">
+                <div class="key">주문금액</div>
+                <div class="value">XX,XXX원</div>
+            </div>
+            <div class="infoText">
+                <div class="key">결제금액</div>
+                <div class="value">XX,XXX원</div>
+            </div>
+            <div class="infoText">
+                <div class="key">결제방식</div>
+                <div class="value">신용카드</div>
+            </div>
+            <div class="infoText">
+                <div class="key">사용 적립금</div>
+                <div class="value">XX,XXXP</div>
+            </div>
+            <div class="infoText">
+                <div class="key">주문 상태</div>
+                <div class="value">결제완료</div>
+            </div>
+            <div class="orderItemList">
+                <div class="orderItemTitle">주문 상품 목록</div>
+                <hr class="orderItemLine">
+                <div class="orderItems">
+                    <div class="item">
+                        <div class="productImg">
+                            <img src="/file/img/testImg.jpg" alt="">
+                        </div>
+                        <div class="productInfo">
+                            <div class="productName">테스트 상품</div>
+                            <div class="productOption">사이즈 : size</div>
+                            <div class="productAmount">가격 : XX,XXX원</div>
+                        </div>
+                        <div class="itemCount">X개</div>
+                    </div>
+                    <div class="item">
+                        <div class="productImg">
+                            <img src="/file/img/testImg.jpg" alt="">
+                        </div>
+                        <div class="productInfo">
+                            <div class="productName">테스트 상품</div>
+                            <div class="productOption">사이즈 : size</div>
+                            <div class="productAmount">가격 : XX,XXX원</div>
+                        </div>
+                        <div class="itemCount">X개</div>
+                    </div>
+                    <div class="item">
+                        <div class="productImg">
+                            <img src="/file/img/testImg.jpg" alt="">
+                        </div>
+                        <div class="productInfo">
+                            <div class="productName">테스트 상품</div>
+                            <div class="productOption">사이즈 : size</div>
+                            <div class="productAmount">가격 : XX,XXX원</div>
+                        </div>
+                        <div class="itemCount">X개</div>
+                    </div>
+                    <div class="item">
+                        <div class="productImg">
+                            <img src="/file/img/testImg.jpg" alt="">
+                        </div>
+                        <div class="productInfo">
+                            <div class="productName">테스트 상품</div>
+                            <div class="productOption">사이즈 : size</div>
+                            <div class="productAmount">가격 : XX,XXX원</div>
+                        </div>
+                        <div class="itemCount">X개</div>
+                    </div>
+                    <div class="item">
+                        <div class="productImg">
+                            <img src="/file/img/testImg.jpg" alt="">
+                        </div>
+                        <div class="productInfo">
+                            <div class="productName">테스트 상품</div>
+                            <div class="productOption">사이즈 : size</div>
+                            <div class="productAmount">가격 : XX,XXX원</div>
+                        </div>
+                        <div class="itemCount">X개</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{/common/commonFooter}"></th:block>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const itemCheckBoxList = document.querySelectorAll(".itemCheckBox");
+
+        itemCheckBoxList.forEach(itemCheckBox => {
+            itemCheckBox.addEventListener('click', function () {
+                this.classList.toggle('checked');
+            });
+        })
+    })
+</script>
+<th:block th:replace="~{/common/commonFoot}"></th:block>

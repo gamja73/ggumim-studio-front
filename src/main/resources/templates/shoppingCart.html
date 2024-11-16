@@ -1,0 +1,181 @@
+<th:block th:replace="~{/common/commonHead}"></th:block>
+<body>
+<th:block th:replace="~{/common/commonHeader}"></th:block>
+<div class="myPageContent" data-items="3">
+    <div class="myPageLeftSideContent">
+        <div class="leftSideTop">
+            <div class="userProfileImg">
+                <img src="/file/img/testImg.jpg" alt="">
+            </div>
+            <div class="userName">회원명</div>
+        </div>
+        <hr class="line">
+        <div class="leftSideMenuList">
+            <div class="selected" onclick="moveToPage('/myPage/shoppingCart')">장바구니</div>
+            <div class="" onclick="moveToPage('/myPage/wishList')">찜목록</div>
+            <div class="" onclick="moveToPage('/myPage/order/list')">주문</div>
+            <div class="" onclick="moveToPage('/myPage/order/1')">문의</div>
+            <div class="" onclick="moveToPage('/')">회원정보변경</div>
+        </div>
+    </div>
+    <div class="myPageCenterContent">
+        <div class="topContent">
+            <div class="title">장바구니 목록</div>
+        </div>
+        <hr class="line">
+        <div class="shoppingCartItemList">
+            <div class="item">
+                <div class="itemCheckBox" tabindex="0">
+                    <div class="checkbox"></div>
+                </div>
+                <div class="productImg">
+                    <img src="/file/img/testImg.jpg" alt="">
+                </div>
+                <div class="productInfo">
+                    <div class="productName">테스트 상품</div>
+                    <div class="productOption">사이즈 : size</div>
+                    <div class="productAmount">가격 : XX,XXX원</div>
+                </div>
+                <div class="itemButtonGroup">
+                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
+                    <div class="itemCounter">
+                        <div class="plusBtn disable"><i class="fa-solid fa-chevron-left"></i></div>
+                        <div class="count">1</div>
+                        <div class="minusBtn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itemCheckBox" tabindex="0">
+                    <div class="checkbox"></div>
+                </div>
+                <div class="productImg">
+                    <img src="/file/img/testImg.jpg" alt="">
+                </div>
+                <div class="productInfo">
+                    <div class="productName">테스트 상품</div>
+                    <div class="productOption">사이즈 : size</div>
+                    <div class="productAmount">가격 : XX,XXX원</div>
+                </div>
+                <div class="itemButtonGroup">
+                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
+                    <div class="itemCounter">
+                        <div class="plusBtn disable"><i class="fa-solid fa-chevron-left"></i></div>
+                        <div class="count">1</div>
+                        <div class="minusBtn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itemCheckBox" tabindex="0">
+                    <div class="checkbox"></div>
+                </div>
+                <div class="productImg">
+                    <img src="/file/img/testImg.jpg" alt="">
+                </div>
+                <div class="productInfo">
+                    <div class="productName">테스트 상품</div>
+                    <div class="productOption">사이즈 : size</div>
+                    <div class="productAmount">가격 : XX,XXX원</div>
+                </div>
+                <div class="itemButtonGroup">
+                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
+                    <div class="itemCounter">
+                        <div class="plusBtn disable"><i class="fa-solid fa-chevron-left"></i></div>
+                        <div class="count">1</div>
+                        <div class="minusBtn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itemCheckBox" tabindex="0">
+                    <div class="checkbox"></div>
+                </div>
+                <div class="productImg">
+                    <img src="/file/img/testImg.jpg" alt="">
+                </div>
+                <div class="productInfo">
+                    <div class="productName">테스트 상품</div>
+                    <div class="productOption">사이즈 : size</div>
+                    <div class="productAmount">가격 : XX,XXX원</div>
+                </div>
+                <div class="itemButtonGroup">
+                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
+                    <div class="itemCounter">
+                        <div class="plusBtn disable"><i class="fa-solid fa-chevron-left"></i></div>
+                        <div class="count">1</div>
+                        <div class="minusBtn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itemCheckBox" tabindex="0">
+                    <div class="checkbox"></div>
+                </div>
+                <div class="productImg">
+                    <img src="/file/img/testImg.jpg" alt="">
+                </div>
+                <div class="productInfo">
+                    <div class="productName">테스트 상품</div>
+                    <div class="productOption">사이즈 : size</div>
+                    <div class="productAmount">가격 : XX,XXX원</div>
+                </div>
+                <div class="itemButtonGroup">
+                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
+                    <div class="itemCounter">
+                        <div class="plusBtn disable"><i class="fa-solid fa-chevron-left"></i></div>
+                        <div class="count">1</div>
+                        <div class="minusBtn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="myPageRightSideContent">
+        <div class="title">주문</div>
+        <hr class="bordLine">
+        <div class="orderSideList">
+            <div class="item">
+                <div class="key">총 상품 금액</div>
+                <div class="value">XX,XXX원</div>
+            </div>
+            <div class="item">
+                <div class="key">선택 상품 금액</div>
+                <div class="value">XX,XXX원</div>
+            </div>
+            <div class="item">
+                <div class="key">배송비</div>
+                <div class="value">XX,XXX원</div>
+            </div>
+            <div class="item">
+                <div class="key">총 할인 금액</div>
+                <div class="value">XX,XXX원</div>
+            </div>
+        </div>
+        <hr class="line">
+        <div class="orderSideList">
+            <div class="item">
+                <div class="key bold">결제 예정 금액</div>
+                <div class="value bold">XX,XXX원</div>
+            </div>
+        </div>
+        <div class="orderSideButtonGroup">
+            <button class="all">전체주문</button>
+            <button class="select">선택주문</button>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{/common/commonFooter}"></th:block>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const itemCheckBoxList = document.querySelectorAll(".itemCheckBox");
+
+        itemCheckBoxList.forEach(itemCheckBox => {
+            itemCheckBox.addEventListener('click', function () {
+                this.classList.toggle('checked');
+            });
+        })
+    })
+</script>
+<th:block th:replace="~{/common/commonFoot}"></th:block>

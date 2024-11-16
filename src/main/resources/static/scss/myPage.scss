@@ -1,0 +1,714 @@
+$global-border-color: #a5a5a5;
+$global-hover-color: #a5a5a5;
+$mypage-selected-color: #51ff00;
+$mypage-non-selected-color: #616161;
+$color-white: #ffffff;
+$color-black: #000000;
+$color-gray: #696969;
+
+.myPageContent {
+    display: grid;
+    gap: 15px;
+    margin: auto;
+    margin-top: 30px;
+    min-width: 900px;
+
+    &[data-items="2"] {
+        grid-template-columns: 1fr 4fr;
+        width: 70%;
+    }
+    
+    &[data-items="3"] {
+        grid-template-columns: 1fr 4fr 2fr;
+        width: 80%;
+    }
+
+    .myPageLeftSideContent {
+        border: 1px solid $global-border-color;
+        border-radius: 10px;
+        height: min-content;
+    
+        .leftSideTop {
+            border-bottom: $global-border-color;
+    
+            .userProfileImg {
+                width: 60%;
+                border: 1px solid $global-border-color;
+                border-radius: 100px;
+                margin-top: 30px !important;
+    
+                margin: auto;
+    
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 100px;
+                }
+            }
+    
+            .userName {
+                width: 100%;
+                margin-top: 30px;
+                text-align: center;
+                font-weight: lighter;
+                font-size: 22px;
+            }
+        }
+    
+        .line {
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+            border: 1px solid $global-border-color;
+        }
+    
+        .leftSideMenuList {
+            color: $mypage-non-selected-color;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 10px;
+    
+            div {
+                padding: 10px;
+                width: 70%;
+                margin: auto;
+                border: 1px solid transparent;
+                border-radius: 10px;
+            
+                &:hover {
+                    cursor: pointer;
+                    border-color: $global-border-color;
+                }
+            }
+    
+            .selected {
+                color: $mypage-selected-color !important;
+            }
+        }
+    }
+
+    .myPageRightSideContent {
+        border: 1px solid $global-border-color;
+        border-radius: 10px;
+        height: min-content;
+    }
+
+    .myPageCenterContent {
+        border: 1px solid $global-border-color;
+        border-radius: 10px;
+    }
+}
+
+
+.myPageCenterContent > .myPageMainTopBox {
+    width: 100%;
+    min-height: 100px;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .box {
+        width: 90%;
+        height: 100%;
+        max-width: 400px;
+        border: 1px solid $global-border-color;
+        display:grid;
+        align-items:center;
+
+        .topText {
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .text {
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+        }
+    }
+}
+
+.myPageCenterContent > .line {
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.myPageCenterContent > .topContent {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 10px;
+
+
+    .title {
+        font-size: 18px;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .btnGroup {
+        width: 100%;
+        display: inline-flex;
+        flex-direction: row-reverse;
+    }
+}
+
+// 최근 주문 목록
+.myPageCenterContent > .recentOrderList {
+    margin-bottom: 50px;
+
+    .title  {
+        margin-left: 5%;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .line {
+        width: 90%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .itemList {
+        width: 90%;
+        margin: auto;
+        row-gap: 20px;
+
+        .item {
+            border: 1px solid $global-border-color;
+            border-radius: 10px;
+            display: flex;
+            margin-bottom: 10px;
+            min-height: 120px;
+            max-height: 140px;
+
+            .productImg {
+                width: 120px;
+                height: 120px;
+                padding: 10px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border: 1px solid $global-border-color;
+                }
+            }
+            
+            .orderInfo {
+                display: flex;
+                place-items: center;
+                width: 85%;
+
+                .information {
+                    padding-left: 20px;
+                    width: 80%;
+
+                    .orderStatus {
+                        color: #51ff00;
+                        font-weight: bold;
+                    }
+
+                    .productName {
+                        font-weight: bold;
+                    }
+
+                    .productCount, 
+                    .orderAmount {
+                        padding-left: 30px;
+                    }
+                }
+
+                .detailBtn {
+                    width: 20%;
+
+                    button {
+                        border: 1px solid $global-border-color;
+                        border-radius: 10px;
+                        background-color: $color-white;
+                        font-size: 14px;
+                        margin-right: 20p;
+
+                        &:hover {
+                            background-color: $global-hover-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 장바구니
+.myPageCenterContent > .shoppingCartItemList {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+
+    .item {
+        display: grid;
+        grid-template-columns: 50px 130px auto 150px;
+        width: 100%;
+        height: 150px;
+        border: 1px solid $global-border-color;
+        border-radius: 10px;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        .itemCheckBox {
+            width: 15px;
+            height: 15px;
+            border: 1px solid $global-border-color;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            margin-left: 20px;
+        }
+        
+        .checkbox {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            transition: background-color 0.2s;
+        }
+        
+        .itemCheckBox.checked .checkbox {
+            background-color: $global-border-color;
+            clip-path: inset(2px);
+        }
+
+        .productImg {
+            width: 130px;
+            height: 130px;
+            border: 1px solid $global-border-color;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .productInfo {
+            width: 100%;
+            margin-left: 20px;
+            height: 120px;
+            margin-top: 0px;
+
+            .productName {
+                text-align: left;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .productOption,
+            .productAmount {
+                margin-left: 10px;
+                text-align: left;
+                font-size: 12px;
+                font-weight: normal;
+            }
+            
+        }
+
+        .itemButtonGroup {
+            width: 100%;
+            height: 100%;
+
+            .deleteBtn {
+                width: 20px;
+                margin-top: 10px;
+                margin-left: 120px;
+            }
+        }
+
+        .itemCounter {
+            padding: 5px;
+            width: 120px;
+            border: 1px solid $global-border-color;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 20px auto 20px;
+            margin-top: 60px;
+
+            .plusBtn, 
+            .minusBtn {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+
+            .disable {
+                color: #b0b0b0;
+            }
+
+            .count {
+                text-align: center;
+            }
+        }
+    }
+}
+
+// 찜목록
+.myPageCenterContent > .wishListItems {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+
+    .item {
+        display: grid;
+        grid-template-columns: 50px 130px auto 150px;
+        width: 100%;
+        height: 150px;
+        border: 1px solid $global-border-color;
+        border-radius: 10px;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        .itemCheckBox {
+            width: 15px;
+            height: 15px;
+            border: 1px solid $global-border-color;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            margin-left: 20px;
+        }
+        
+        .checkbox {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            transition: background-color 0.2s;
+        }
+        
+        .itemCheckBox.checked .checkbox {
+            background-color: $global-border-color;
+            clip-path: inset(2px);
+        }
+
+        .productImg {
+            width: 130px;
+            height: 130px;
+            border: 1px solid $global-border-color;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .productInfo {
+            width: 100%;
+            margin-left: 20px;
+            height: 120px;
+            margin-top: 0px;
+
+            .productName {
+                text-align: left;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .productOption,
+            .productAmount {
+                margin-left: 10px;
+                text-align: left;
+                font-size: 12px;
+                font-weight: normal;
+            }
+            
+        }
+
+        .itemButtonGroup {
+            width: 100%;
+            height: 100%;
+
+            .deleteBtn {
+                width: 20px;
+                margin-top: 10px;
+                margin-left: 120px;
+            }
+        }
+
+        .itemCounter {
+            padding: 5px;
+            width: 120px;
+            border: 1px solid $global-border-color;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 20px auto 20px;
+            margin-top: 60px;
+
+            .plusBtn, 
+            .minusBtn {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+
+            .disable {
+                color: #b0b0b0;
+            }
+
+            .count {
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+// 쇼핑카트 오른쪽 사이드 메뉴
+.myPageRightSideContent {
+    .title {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .line {
+        width: 90%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 1px solid $global-border-color;
+    }
+
+    .bordLine {
+        width: 90%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 2px solid $global-border-color;
+    }
+
+    .orderSideList {
+        width: 90%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        .item {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            margin-top: 15px;
+            margin-bottom: 15px;
+
+            .key {
+                text-align: left;
+                font-weight: normal;
+            }
+        
+            .value {
+                text-align: right;
+                font-weight: lighter;
+            }
+        
+            .bold {
+                font-weight: bold !important;
+            }
+        }
+    }
+
+    .orderSideButtonGroup {
+        display: flex;
+        gap: 5%;
+        justify-content: center;
+        margin-bottom: 10px;
+        
+        .all {
+            width: 42%;
+            background-color: $color-gray;
+            color: $color-white;
+            font-size: 12px;
+            border: 1px solid $global-border-color;
+            border-radius: 10px;
+        }
+        
+        .select {
+            width: 42%;
+            background-color: white;
+            color: $color-black;
+            font-size: 12px;
+            border: 1px solid $global-border-color;
+            border-radius: 10px;
+        }
+    }
+}
+
+// 주문 목록
+.myPageCenterContent > .orderList {
+    width: 90%;
+    margin: auto;
+
+    .item {
+        border: 1px solid $global-border-color;
+        border-radius: 10px;
+        display: flex;
+        margin-bottom: 10px;
+        min-height: 120px;
+        max-height: 140px;
+
+        .productImg {
+            width: 120px;
+            height: 120px;
+            padding: 10px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border: 1px solid $global-border-color;
+            }
+        }
+        
+        .orderInfo {
+            display: flex;
+            place-items: center;
+            width: 85%;
+
+            .information {
+                padding-left: 20px;
+                width: 80%;
+
+                .orderStatus {
+                    color: #51ff00;
+                    font-weight: bold;
+                }
+
+                .productName {
+                    font-weight: bold;
+                }
+
+                .productCount, 
+                .orderAmount {
+                    padding-left: 30px;
+                }
+            }
+
+            .detailBtn {
+                width: 20%;
+                display: flex;
+                flex-direction: row-reverse;
+
+                button {
+                    border: 1px solid $global-border-color;
+                    border-radius: 10px;
+                    background-color: $color-white;
+                    font-size: 14px;
+                    margin-right: 20px;
+
+                    &:hover {
+                        background-color: $global-hover-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.orderDetailContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .infoText {
+        width: 90%;
+        margin: auto;
+        display: grid;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        grid-template-columns: 150px auto;
+
+    
+        .key {
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .value {
+            text-align: left;
+        }
+        
+    }
+    
+    .orderItemList {
+        width: 97%;
+        margin: auto;
+        padding: 10px;
+        border: 1px solid $global-border-color;
+        border-radius: 10px;
+
+        .orderItemTitle {
+            font-size: 14px;
+            font-weight: bold;
+        }
+    
+        .orderItemLine {
+            border: 1px solid $global-border-color;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    
+        .orderItems {
+            width: 100%;
+            margin: auto;
+
+            .item {
+                display: grid;
+                grid-template-columns: 110px auto 100px;
+                width: 100%;
+                height: 130px;
+                border: 1px solid $global-border-color;
+                border-radius: 10px;
+                align-items: center;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            
+                .productImg {
+                    width: 100px;
+                    height: 100px;
+                    margin-left: 10px;
+                    border: 1px solid $global-border-color;
+            
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            
+                .productInfo {
+                    width: 100%;
+                    margin-left: 20px;
+                    height: 120px;
+                    margin-top: 10px;
+            
+                    .productName {
+                        text-align: left;
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+            
+                    .productOption,
+                    .productAmount {
+                        margin-left: 10px;
+                        text-align: left;
+                        font-size: 12px;
+                        font-weight: normal;
+                    }
+                    
+                }
+            }
+        }
+    }
+}

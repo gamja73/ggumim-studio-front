@@ -1,0 +1,890 @@
+html {
+  padding: 0;
+  margin: 0;
+  height: 10000px;
+}
+
+.header {
+  height: auto;
+  width: 70%;
+  min-width: 900px;
+  margin: auto;
+}
+.header .headerUserInfo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.header .headerUserInfo .notLogin {
+  display: none;
+}
+.header .headerUserInfo .notLogin div {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+.header .headerUserInfo .notLogin div a {
+  color: #000000;
+  text-decoration-line: none;
+  border: 1px solid #a5a5a5;
+  padding: 3px;
+  width: 10%;
+  max-width: 100px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+.header .headerUserInfo .notLogin div a:hover {
+  background-color: #a5a5a5;
+}
+.header .headerUserInfo .login {
+  display: none;
+  height: 100px;
+}
+.header .headerUserInfo .activate {
+  display: block !important;
+}
+.header .headerSearch {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+.header .headerSearch .headerLogoImg {
+  width: 20%;
+  height: auto;
+  max-height: 50px;
+}
+.header .headerSearch .headerLogoImg img {
+  display: block;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-height: 100% !important;
+  border: 1px solid #a5a5a5;
+}
+.header .headerSearch .headerSearchBar {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.header .headerSearch .headerSearchBar .searchBar {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  width: 95%;
+  padding: 5px;
+}
+.header .headerSearch .headerSearchBar .searchBar > input {
+  border: none;
+  width: 100%;
+}
+.header .headerSearch .headerSearchBar .searchBar > input:focus {
+  outline: none;
+}
+.header .headerSearch .headerSearchBar .searchBtn {
+  width: 5%;
+  text-align: center;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  padding: 5px;
+}
+.header .headerSearch .headerSearchBar .searchBtn:hover {
+  cursor: pointer;
+}
+.header .headerSearch .headerSearchBar .searchBtn > i {
+  width: 100%;
+}
+.header .headerNavBar {
+  width: 100%;
+  height: 30px;
+}
+.header .headerNavBar nav {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.header .headerNavBar nav div {
+  flex: 1 1 auto;
+  max-width: 170px;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 3em;
+  transition: border-color 0ms;
+}
+.header .headerNavBar nav div a {
+  color: #000000;
+  text-decoration-line: none;
+}
+.header .headerNavBar nav div:hover {
+  color: #000000;
+  border-color: #a5a5a5;
+}
+
+.bannerContainer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 200px;
+  padding: 10px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+}
+.bannerContainer .bannerList {
+  display: flex;
+  transition: margin-left 0.5s ease;
+  height: 200px;
+  padding-bottom: 20px;
+}
+.bannerContainer .bannerList .bannerItem {
+  width: 33.333%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bannerContainer .bannerList .bannerItem img {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: auto;
+}
+.bannerContainer .prevButton,
+.bannerContainer .nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+.bannerContainer .prevButton:hover,
+.bannerContainer .nextButton:hover {
+  background-color: rgba(255, 255, 255, 0);
+}
+.bannerContainer .prevButton {
+  left: 10px;
+}
+.bannerContainer .nextButton {
+  right: 10px;
+}
+.bannerContainer .pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2941176471);
+}
+.bannerContainer .pagination button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+.bannerContainer .pagination button.active {
+  background-color: rgba(0, 0, 0, 0.3137254902);
+}
+
+.myPageContent {
+  display: grid;
+  gap: 15px;
+  margin: auto;
+  margin-top: 30px;
+  min-width: 900px;
+}
+.myPageContent[data-items="2"] {
+  grid-template-columns: 1fr 4fr;
+  width: 70%;
+}
+.myPageContent[data-items="3"] {
+  grid-template-columns: 1fr 4fr 2fr;
+  width: 80%;
+}
+.myPageContent .myPageLeftSideContent {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  height: -moz-min-content;
+  height: min-content;
+}
+.myPageContent .myPageLeftSideContent .leftSideTop {
+  border-bottom: #a5a5a5;
+}
+.myPageContent .myPageLeftSideContent .leftSideTop .userProfileImg {
+  width: 60%;
+  border: 1px solid #a5a5a5;
+  border-radius: 100px;
+  margin-top: 30px !important;
+  margin: auto;
+}
+.myPageContent .myPageLeftSideContent .leftSideTop .userProfileImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+}
+.myPageContent .myPageLeftSideContent .leftSideTop .userName {
+  width: 100%;
+  margin-top: 30px;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 22px;
+}
+.myPageContent .myPageLeftSideContent .line {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  border: 1px solid #a5a5a5;
+}
+.myPageContent .myPageLeftSideContent .leftSideMenuList {
+  color: #616161;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+}
+.myPageContent .myPageLeftSideContent .leftSideMenuList div {
+  padding: 10px;
+  width: 70%;
+  margin: auto;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+.myPageContent .myPageLeftSideContent .leftSideMenuList div:hover {
+  cursor: pointer;
+  border-color: #a5a5a5;
+}
+.myPageContent .myPageLeftSideContent .leftSideMenuList .selected {
+  color: #51ff00 !important;
+}
+.myPageContent .myPageRightSideContent {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  height: -moz-min-content;
+  height: min-content;
+}
+.myPageContent .myPageCenterContent {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+}
+
+.myPageCenterContent > .myPageMainTopBox {
+  width: 100%;
+  min-height: 100px;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.myPageCenterContent > .myPageMainTopBox .box {
+  width: 90%;
+  height: 100%;
+  max-width: 400px;
+  border: 1px solid #a5a5a5;
+  display: grid;
+  align-items: center;
+}
+.myPageCenterContent > .myPageMainTopBox .box .topText {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+.myPageCenterContent > .myPageMainTopBox .box .text {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+
+.myPageCenterContent > .line {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.myPageCenterContent > .topContent {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 10px;
+}
+.myPageCenterContent > .topContent .title {
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+}
+.myPageCenterContent > .topContent .btnGroup {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.myPageCenterContent > .recentOrderList {
+  margin-bottom: 50px;
+}
+.myPageCenterContent > .recentOrderList .title {
+  margin-left: 5%;
+  font-size: 22px;
+  font-weight: bold;
+}
+.myPageCenterContent > .recentOrderList .line {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.myPageCenterContent > .recentOrderList .itemList {
+  width: 90%;
+  margin: auto;
+  row-gap: 20px;
+}
+.myPageCenterContent > .recentOrderList .itemList .item {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  display: flex;
+  margin-bottom: 10px;
+  min-height: 120px;
+  max-height: 140px;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .productImg {
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .productImg img {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #a5a5a5;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo {
+  display: flex;
+  place-items: center;
+  width: 85%;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo .information {
+  padding-left: 20px;
+  width: 80%;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo .information .orderStatus {
+  color: #51ff00;
+  font-weight: bold;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo .information .productName {
+  font-weight: bold;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo .information .productCount,
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo .information .orderAmount {
+  padding-left: 30px;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo .detailBtn {
+  width: 20%;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo .detailBtn button {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 14px;
+  margin-right: 20p;
+}
+.myPageCenterContent > .recentOrderList .itemList .item .orderInfo .detailBtn button:hover {
+  background-color: #a5a5a5;
+}
+
+.myPageCenterContent > .shoppingCartItemList {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+.myPageCenterContent > .shoppingCartItemList .item {
+  display: grid;
+  grid-template-columns: 50px 130px auto 150px;
+  width: 100%;
+  height: 150px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.myPageCenterContent > .shoppingCartItemList .item .itemCheckBox {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #a5a5a5;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  margin-left: 20px;
+}
+.myPageCenterContent > .shoppingCartItemList .item .checkbox {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+.myPageCenterContent > .shoppingCartItemList .item .itemCheckBox.checked .checkbox {
+  background-color: #a5a5a5;
+  -webkit-clip-path: inset(2px);
+          clip-path: inset(2px);
+}
+.myPageCenterContent > .shoppingCartItemList .item .productImg {
+  width: 130px;
+  height: 130px;
+  border: 1px solid #a5a5a5;
+}
+.myPageCenterContent > .shoppingCartItemList .item .productImg img {
+  width: 100%;
+  height: 100%;
+}
+.myPageCenterContent > .shoppingCartItemList .item .productInfo {
+  width: 100%;
+  margin-left: 20px;
+  height: 120px;
+  margin-top: 0px;
+}
+.myPageCenterContent > .shoppingCartItemList .item .productInfo .productName {
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+}
+.myPageCenterContent > .shoppingCartItemList .item .productInfo .productOption,
+.myPageCenterContent > .shoppingCartItemList .item .productInfo .productAmount {
+  margin-left: 10px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+}
+.myPageCenterContent > .shoppingCartItemList .item .itemButtonGroup {
+  width: 100%;
+  height: 100%;
+}
+.myPageCenterContent > .shoppingCartItemList .item .itemButtonGroup .deleteBtn {
+  width: 20px;
+  margin-top: 10px;
+  margin-left: 120px;
+}
+.myPageCenterContent > .shoppingCartItemList .item .itemCounter {
+  padding: 5px;
+  width: 120px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 20px auto 20px;
+  margin-top: 60px;
+}
+.myPageCenterContent > .shoppingCartItemList .item .itemCounter .plusBtn,
+.myPageCenterContent > .shoppingCartItemList .item .itemCounter .minusBtn {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.myPageCenterContent > .shoppingCartItemList .item .itemCounter .disable {
+  color: #b0b0b0;
+}
+.myPageCenterContent > .shoppingCartItemList .item .itemCounter .count {
+  text-align: center;
+}
+
+.myPageCenterContent > .wishListItems {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+.myPageCenterContent > .wishListItems .item {
+  display: grid;
+  grid-template-columns: 50px 130px auto 150px;
+  width: 100%;
+  height: 150px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.myPageCenterContent > .wishListItems .item .itemCheckBox {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #a5a5a5;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  margin-left: 20px;
+}
+.myPageCenterContent > .wishListItems .item .checkbox {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+.myPageCenterContent > .wishListItems .item .itemCheckBox.checked .checkbox {
+  background-color: #a5a5a5;
+  -webkit-clip-path: inset(2px);
+          clip-path: inset(2px);
+}
+.myPageCenterContent > .wishListItems .item .productImg {
+  width: 130px;
+  height: 130px;
+  border: 1px solid #a5a5a5;
+}
+.myPageCenterContent > .wishListItems .item .productImg img {
+  width: 100%;
+  height: 100%;
+}
+.myPageCenterContent > .wishListItems .item .productInfo {
+  width: 100%;
+  margin-left: 20px;
+  height: 120px;
+  margin-top: 0px;
+}
+.myPageCenterContent > .wishListItems .item .productInfo .productName {
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+}
+.myPageCenterContent > .wishListItems .item .productInfo .productOption,
+.myPageCenterContent > .wishListItems .item .productInfo .productAmount {
+  margin-left: 10px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+}
+.myPageCenterContent > .wishListItems .item .itemButtonGroup {
+  width: 100%;
+  height: 100%;
+}
+.myPageCenterContent > .wishListItems .item .itemButtonGroup .deleteBtn {
+  width: 20px;
+  margin-top: 10px;
+  margin-left: 120px;
+}
+.myPageCenterContent > .wishListItems .item .itemCounter {
+  padding: 5px;
+  width: 120px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 20px auto 20px;
+  margin-top: 60px;
+}
+.myPageCenterContent > .wishListItems .item .itemCounter .plusBtn,
+.myPageCenterContent > .wishListItems .item .itemCounter .minusBtn {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.myPageCenterContent > .wishListItems .item .itemCounter .disable {
+  color: #b0b0b0;
+}
+.myPageCenterContent > .wishListItems .item .itemCounter .count {
+  text-align: center;
+}
+
+.myPageRightSideContent .title {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.myPageRightSideContent .line {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #a5a5a5;
+}
+.myPageRightSideContent .bordLine {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #a5a5a5;
+}
+.myPageRightSideContent .orderSideList {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.myPageRightSideContent .orderSideList .item {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.myPageRightSideContent .orderSideList .item .key {
+  text-align: left;
+  font-weight: normal;
+}
+.myPageRightSideContent .orderSideList .item .value {
+  text-align: right;
+  font-weight: lighter;
+}
+.myPageRightSideContent .orderSideList .item .bold {
+  font-weight: bold !important;
+}
+.myPageRightSideContent .orderSideButtonGroup {
+  display: flex;
+  gap: 5%;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.myPageRightSideContent .orderSideButtonGroup .all {
+  width: 42%;
+  background-color: #696969;
+  color: #ffffff;
+  font-size: 12px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+}
+.myPageRightSideContent .orderSideButtonGroup .select {
+  width: 42%;
+  background-color: white;
+  color: #000000;
+  font-size: 12px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+}
+
+.myPageCenterContent > .orderList {
+  width: 90%;
+  margin: auto;
+}
+.myPageCenterContent > .orderList .item {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  display: flex;
+  margin-bottom: 10px;
+  min-height: 120px;
+  max-height: 140px;
+}
+.myPageCenterContent > .orderList .item .productImg {
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+}
+.myPageCenterContent > .orderList .item .productImg img {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #a5a5a5;
+}
+.myPageCenterContent > .orderList .item .orderInfo {
+  display: flex;
+  place-items: center;
+  width: 85%;
+}
+.myPageCenterContent > .orderList .item .orderInfo .information {
+  padding-left: 20px;
+  width: 80%;
+}
+.myPageCenterContent > .orderList .item .orderInfo .information .orderStatus {
+  color: #51ff00;
+  font-weight: bold;
+}
+.myPageCenterContent > .orderList .item .orderInfo .information .productName {
+  font-weight: bold;
+}
+.myPageCenterContent > .orderList .item .orderInfo .information .productCount,
+.myPageCenterContent > .orderList .item .orderInfo .information .orderAmount {
+  padding-left: 30px;
+}
+.myPageCenterContent > .orderList .item .orderInfo .detailBtn {
+  width: 20%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.myPageCenterContent > .orderList .item .orderInfo .detailBtn button {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 14px;
+  margin-right: 20px;
+}
+.myPageCenterContent > .orderList .item .orderInfo .detailBtn button:hover {
+  background-color: #a5a5a5;
+}
+
+.orderDetailContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.orderDetailContainer .infoText {
+  width: 90%;
+  margin: auto;
+  display: grid;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  grid-template-columns: 150px auto;
+}
+.orderDetailContainer .infoText .key {
+  font-weight: bold;
+  text-align: left;
+}
+.orderDetailContainer .infoText .value {
+  text-align: left;
+}
+.orderDetailContainer .orderItemList {
+  width: 97%;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+}
+.orderDetailContainer .orderItemList .orderItemTitle {
+  font-size: 14px;
+  font-weight: bold;
+}
+.orderDetailContainer .orderItemList .orderItemLine {
+  border: 1px solid #a5a5a5;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.orderDetailContainer .orderItemList .orderItems {
+  width: 100%;
+  margin: auto;
+}
+.orderDetailContainer .orderItemList .orderItems .item {
+  display: grid;
+  grid-template-columns: 110px auto 100px;
+  width: 100%;
+  height: 130px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.orderDetailContainer .orderItemList .orderItems .item .productImg {
+  width: 100px;
+  height: 100px;
+  margin-left: 10px;
+  border: 1px solid #a5a5a5;
+}
+.orderDetailContainer .orderItemList .orderItems .item .productImg img {
+  width: 100%;
+  height: 100%;
+}
+.orderDetailContainer .orderItemList .orderItems .item .productInfo {
+  width: 100%;
+  margin-left: 20px;
+  height: 120px;
+  margin-top: 10px;
+}
+.orderDetailContainer .orderItemList .orderItems .item .productInfo .productName {
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+}
+.orderDetailContainer .orderItemList .orderItems .item .productInfo .productOption,
+.orderDetailContainer .orderItemList .orderItems .item .productInfo .productAmount {
+  margin-left: 10px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.btn {
+  background-color: #ffffff;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  padding: 7px;
+  font-size: 10px;
+}
+.btn:hover {
+  background-color: #a5a5a5;
+}
+
+.btnBlack {
+  background-color: #000000 !important;
+  border: 1px solid #000000 !important;
+  color: #ffffff !important;
+}
+.btnBlack:hover {
+  background-color: #a5a5a5 !important;
+  color: #000000 !important;
+}
+
+.mainContent {
+  width: 70%;
+  height: auto;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.productList .productItems {
+  width: 100%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.productList .productItems .productItem {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+}
+.productList .productItems .productItem .productImg {
+  width: 100%;
+  height: auto;
+}
+.productList .productItems .productItem .productImg img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.productList .productItems .productItem .productInfo {
+  padding: 10px;
+}
+.productList .productItems .productItem .productInfo .productName {
+  width: 100%;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+}
+.productList .productItems .productItem .productInfo .productPrice {
+  width: 100%;
+  text-align: right;
+  font-weight: normal;
+}
+.productList .productItems .productItem .productInfo .productBrand {
+  width: 100%;
+  text-align: right;
+  font-weight: lighter;
+}
+.productList .productItems .productItem .productInfo .productBrand:hover {
+  cursor: pointer;
+}
+.productList .productItems .productItem .productInfo .productBtnGroup {
+  width: 100%;
+  text-align: right;
+}
+.productList .productItems .productItem .productInfo .productBtnGroup button {
+  border-radius: 10px;
+  border: 1px solid #a5a5a5;
+  background-color: #ffffff;
+}
+.productList .pagination {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+.productList .pagination button {
+  padding: 5px;
+  height: 40px;
+  width: 40px;
+  background-color: #ffffff;
+  border: 1px solid #a5a5a5;
+  border-radius: 15px;
+}/*# sourceMappingURL=style.css.map */

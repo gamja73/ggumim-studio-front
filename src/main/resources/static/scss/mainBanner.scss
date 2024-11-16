@@ -1,0 +1,85 @@
+$global-border-color: #a5a5a5;
+
+.bannerContainer {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    border: 1px solid $global-border-color;
+    border-radius: 10px;
+
+    .bannerList {
+        display: flex;
+        transition: margin-left 0.5s ease;
+        height: 200px;
+        padding-bottom: 20px;
+
+        .bannerItem {
+            width: 33.333%;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+                width: auto;
+            }
+        }
+    }
+
+    .prevButton,
+    .nextButton {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ffffff00;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1;
+
+        &:hover {
+            background-color: #ffffff00;
+        }
+    }
+
+    .prevButton {
+        left: 10px;
+    }
+
+    .nextButton {
+        right: 10px;
+    }
+
+    .pagination {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        border-radius: 10px;
+        background-color: #ffffff4b;
+
+        button {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            cursor: pointer;
+        }
+
+        button.active {
+            background-color: #00000050;
+        }
+    }
+}

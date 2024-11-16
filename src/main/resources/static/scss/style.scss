@@ -1,0 +1,116 @@
+@import "./index.scss";
+// @import "./mainBanner.scss";
+@import "./myPage.scss";
+
+$global-border-color: #a5a5a5;
+$global-hover-color: #a5a5a5;
+$mypage-selected-color: #51ff00;
+$mypage-non-selected-color: #616161;
+$color-white: #ffffff;
+$color-black: #000000;
+
+.btn {
+    background-color: $color-white;
+    border: 1px solid $global-border-color;
+    font-size: 10px;
+    
+    &:hover {
+        background-color: $global-hover-color;
+    }
+}
+
+.btnBlack {
+    background-color: $color-black !important;
+    border: 1px solid $color-black !important;
+    color: $color-white !important;
+    
+    &:hover {
+        background-color: $global-hover-color !important;
+        color: $color-black !important;
+    }
+}
+
+.mainContent {
+    width: 70%;
+    height: auto;
+    margin: auto;
+    margin-top: 50px;
+
+}
+
+.productList {
+    .productItems {
+        width: 100%;
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+
+        .productItem {
+            border: 1px solid $global-border-color;
+            border-radius: 10px;
+
+            .productImg {
+                width: 100%;
+                height: auto;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                }
+            }
+
+            .productInfo {
+                padding: 10px;
+
+                .productName {
+                    width: 100%;
+                    text-align: left;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                .productPrice {
+                    width: 100%;
+                    text-align: right;
+                    font-weight: normal;
+                }
+                .productBrand {
+                    width: 100%;
+                    text-align: right;
+                    font-weight: lighter;
+                    
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+                .productBtnGroup {
+                    width: 100%;
+                    text-align: right;
+                    
+                    button {
+                        border-radius: 10px;
+                        border: 1px solid $global-border-color;
+                        background-color: $color-white;
+                    }
+                }
+            }
+        }
+    }
+    
+    .pagination {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 50px;
+        
+        button {
+            padding: 5px;
+            height: 40px;
+            width: 40px;
+            background-color: $color-white;
+            border: 1px solid $global-border-color;
+            border-radius: 15px;
+        }
+    }
+}

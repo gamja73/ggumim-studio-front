@@ -1,0 +1,28 @@
+# Gradle files
+.gradle/
+build/
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Ignore env.yml in resources
+/src/main/resources/env.yml

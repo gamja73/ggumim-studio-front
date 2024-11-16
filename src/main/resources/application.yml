@@ -1,0 +1,23 @@
+server:
+    port: ${server.port}
+
+spring:
+    config:
+        import: optional:classpath:env.yml
+    datasource:
+        url: jdbc:postgresql://${db-config.host}:${db-config.port}/${db-config.database}?characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Seoul
+        username: ${db-config.username}
+        password: ${db-config.password}
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: none
+            generate-ddl: false
+            show-mysql: true
+            properties:
+                format_sql: true
+            naming:
+                implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

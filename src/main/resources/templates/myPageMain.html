@@ -1,0 +1,114 @@
+<th:block th:replace="~{/common/commonHead}"></th:block>
+<body>
+<th:block th:replace="~{/common/commonHeader}"></th:block>
+<div class="myPageContent" data-items="2">
+    <div class="myPageLeftSideContent">
+        <div class="leftSideTop">
+            <div class="userProfileImg">
+                <img src="/file/img/testImg.jpg" alt="">
+            </div>
+            <div class="userName">회원명</div>
+        </div>
+        <hr class="line">
+        <div class="leftSideMenuList">
+            <div class="" onclick="moveToPage('/myPage/shoppingCart')">장바구니</div>
+            <div class="" onclick="moveToPage('/myPage/wishList')">찜목록</div>
+            <div class="" onclick="moveToPage('/myPage/order/list')">주문</div>
+            <div class="" onclick="moveToPage('/myPage/order/1')">문의</div>
+            <div class="" onclick="moveToPage('/')">회원정보변경</div>
+        </div>
+    </div>
+    <div class="myPageCenterContent">
+        <div class="myPageMainTopBox">
+            <div class="box">
+                <div class="topText">적립금</div>
+                <div class="text">XX,XXXP</div>
+            </div>
+            <div class="box" onclick="moveToPage('/myPage/order/list')">
+                <div class="topText">주문</div>
+                <div class="text">XX 건중 XX 건 완료</div>
+            </div>
+        </div>
+        <hr>
+        <div class="recentOrderList">
+            <div class="title">최근 주문 목록</div>
+            <hr class="line">
+            <div class="itemList">
+                <div class="item">
+                    <div class="productImg"><img src="/file/img/testImg.jpg" alt=""></div>
+                    <div class="orderInfo">
+                        <div class="information">
+                            <div class="orderStatus">주문상태</div>
+                            <div class="productName">상품명 외 1건</div>
+                            <div class="productCount">주문개수 : X개</div>
+                            <div class="orderAmount">결제금액 : XX,XXX원</div>
+                        </div>
+                        <div class="detailBtn">
+                            <button onclick="moveToPage('/myPage/order/1')">주문 상세</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="productImg"><img src="/file/img/testImg.jpg" alt=""></div>
+                    <div class="orderInfo">
+                        <div class="information">
+                            <div class="orderStatus">주문상태</div>
+                            <div class="productName">상품명 외 1건</div>
+                            <div class="productCount">주문개수 : X개</div>
+                            <div class="orderAmount">결제금액 : XX,XXX원</div>
+                        </div>
+                        <div class="detailBtn">
+                            <button onclick="moveToPage('/myPage/order/1')">주문 상세</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="productImg"><img src="/file/img/testImg.jpg" alt=""></div>
+                    <div class="orderInfo">
+                        <div class="information">
+                            <div class="orderStatus">주문상태</div>
+                            <div class="productName">상품명 외 1건</div>
+                            <div class="productCount">주문개수 : X개</div>
+                            <div class="orderAmount">결제금액 : XX,XXX원</div>
+                        </div>
+                        <div class="detailBtn">
+                            <button onclick="moveToPage('/myPage/order/1')">주문 상세</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="productImg"><img src="/file/img/testImg.jpg" alt=""></div>
+                    <div class="orderInfo">
+                        <div class="information">
+                            <div class="orderStatus">주문상태</div>
+                            <div class="productName">상품명 외 1건</div>
+                            <div class="productCount">주문개수 : X개</div>
+                            <div class="orderAmount">결제금액 : XX,XXX원</div>
+                        </div>
+                        <div class="detailBtn">
+                            <button onclick="moveToPage('/myPage/order/1')">주문 상세</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="productImg"><img src="/file/img/testImg.jpg" alt=""></div>
+                    <div class="orderInfo">
+                        <div class="information">
+                            <div class="orderStatus">주문상태</div>
+                            <div class="productName">상품명 외 1건</div>
+                            <div class="productCount">주문개수 : X개</div>
+                            <div class="orderAmount">결제금액 : XX,XXX원</div>
+                        </div>
+                        <div class="detailBtn">
+                            <button onclick="moveToPage('/myPage/order/1')">주문 상세</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{/common/commonFooter}"></th:block>
+</body>
+<th:block th:replace="~{/common/commonFoot}"></th:block>
