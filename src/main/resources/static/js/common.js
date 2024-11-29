@@ -1,4 +1,15 @@
-// var PAGE_URL = "58.140.228.150";
+document.addEventListener("DOMContentLoaded", () =>{
+    const headerUserInfo = document.querySelector(".headerUserInfo");
+
+    if (getCookie("accessToken") != null)
+    {
+        headerUserInfo.querySelector(".login").classList.add("active");
+    }
+    else
+    {
+        headerUserInfo.querySelector(".notLogin").classList.add("active");
+    }
+})
 
 const moveToPage = (url) => {
     location.href = url;
