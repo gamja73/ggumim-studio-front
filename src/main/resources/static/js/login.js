@@ -1,15 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const loginModal = document.getElementById("loginModal");
-    const loginBtn = loginModal.getElementById("loginBtn");
-
-    loginBtn.addEventListener("click", () => {
-        login();
-    });
-})
-
 const login = async () => {
-    const id = document.getElementById("id").value;
-    const password = document.getElementById("password").value;
+    const id = document.getElementById("loginModalIdInput").value;
+    const password = document.getElementById("loginModalPasswordInput").value;
 
     if (id === "")
     {
@@ -28,15 +19,34 @@ const login = async () => {
         password: SHA256(password),
     };
 
-     await apiRequest(
+    await apiRequest(
         HttpMethod.POST,
         AUTH_URL + "/login",
-         json,
-         (res) => {
-
-         },
-         (err) => {
+        json,
+        (res) => {
+            setCookie("accessToken", res.accessToken);
+            setCookie("refreshToken", res.refreshToken);
+            location.reload();
+        },
+        (err) => {
             alert(err);
-         }
+        }
+    )
+}
+
+const logout = async () => {
+    await apiRequest(
+        HttpMethod.POST,
+        AUTH_URL + "/logout",
+        null,
+        (res) => {
+            deleteCookie("accessToken");
+            deleteCookie("refreshToken");
+            alert("로그아웃 되었습니다.");
+            location.reload();
+        },
+        (err) => {
+            alert(err);
+        }
     )
 }

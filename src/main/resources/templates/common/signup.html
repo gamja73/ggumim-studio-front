@@ -4,12 +4,15 @@
         <div class="signUpForm">
             <div class="title">회원가입</div>
             <div class="inputGroup">
-                <input type="text" id="id" placeholder="아이디를 입력해주세요.">
-                <input type="password" id="password" placeholder="비밀번호를 입력해주세요.">
-                <input type="password" id="passwordChack" placeholder="비밀번호를 한번더 입력해주세요.">
-                <input type="text" id="name" placeholder="이름을 입력해주세요.">
-                <input type="text" id="callPhone" placeholder="전화번호를 입력해주세요.">
-                <input type="text" id="email" placeholder="이메일주소를 입력해주세요.">
+                <input type="text" id="signupModalId" placeholder="아이디를 입력해주세요.">
+                <input type="password" id="signupModalPassword" placeholder="비밀번호를 입력해주세요.">
+                <input type="password" id="signupModalPasswordCheck" placeholder="비밀번호를 한번더 입력해주세요.">
+                <input type="text" id="signupModalName" placeholder="이름을 입력해주세요.">
+                <input type="text" id="signupModalCallPhone" placeholder="전화번호를 입력해주세요.">
+                <input type="text" id="signupModalEmail" placeholder="이메일주소를 입력해주세요.">
+                <input type="text" id="signupModalNickname" placeholder="닉네임을 입력해주세요.">
+                <input type="text" id="signupModalAddress" placeholder="주소를 입력해주세요.">
+                <input type="text" id="signupModalAddressDetail" placeholder="상세 주소를 입력해주세요.">
             </div>
             <div class="signUpDocumentGroup">
                 <div>
@@ -22,7 +25,7 @@
                 </div>
             </div>
             <div class="btnGroup">
-                <button id="signUpBtn" class="signUpBtn">회원가입</button>
+                <button id="signUpBtn" class="signUpBtn" onclick="signup()">회원가입</button>
             </div>
         </div>
     </div>

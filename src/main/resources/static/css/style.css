@@ -38,10 +38,22 @@ html {
 }
 .header .headerUserInfo .login {
   display: none;
-  height: 100px;
 }
-.header .headerUserInfo .activate {
-  display: block !important;
+.header .headerUserInfo .login div {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+.header .headerUserInfo .login div a {
+  color: #000000;
+  text-decoration-line: none;
+  border: 1px solid #a5a5a5;
+  padding: 3px;
+  width: 10%;
+  max-width: 100px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
 }
 .header .headerSearch {
   display: flex;

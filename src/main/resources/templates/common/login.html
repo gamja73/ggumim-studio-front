@@ -6,12 +6,12 @@
                 <img src="" alt="">
             </div>
             <div class="inputGroup">
-                <input type="text" id="id" placeholder="아이디를 입력해주세요.">
-                <input type="password" id="password" placeholder="비밀번호를 입력해주세요.">
+                <input type="text" id="loginModalIdInput" placeholder="아이디를 입력해주세요.">
+                <input type="password" id="loginModalPasswordInput" placeholder="비밀번호를 입력해주세요.">
             </div>
             <div class="btnGroup">
-                <button id="loginBtn" class="loginBtn">로그인</button>
-                <button id="signUpBtn" class="signUpBtn">회원가입</button>
+                <button id="loginBtn" class="loginBtn" onclick="login()">로그인</button>
+                <button id="signUpBtn" class="signUpBtn" onclick="closeModal('loginModal'); openModal('signupModal');">회원가입</button>
             </div>
         </div>
     </div>
