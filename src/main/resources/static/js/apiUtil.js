@@ -1,5 +1,5 @@
-const AUTH_URL = "127.0.0.1:7788/api/v1/auth";
-const API_URL = "127.0.0.1:7788/api/v1";
+const AUTH_URL = "http://127.0.0.1:7788/api/v1/auth";
+const API_URL = "http://127.0.0.1:7788/api/v1";
 
 // HTTP 메서드 타입을 Enum으로 정의
 const HttpMethod = Object.freeze({
@@ -9,23 +9,10 @@ const HttpMethod = Object.freeze({
     DELETE: 'DELETE',
 });
 
-// 쿠키에서 JWT 토큰 가져오는 함수
-const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-
-    if (parts.length === 2)
-    {
-        return parts.pop().split(';').shift();
-    }
-
-    return null;
-};
-
 // 쿠키에서 엑세스 토큰과 리프레시 토큰을 가져오는 함수
 const getAuthTokens = () => {
-    const accessToken = getCookie('access_token');
-    const refreshToken = getCookie('refresh_token');
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
     return { accessToken, refreshToken };
 };
 
@@ -36,22 +23,26 @@ const apiRequest = async (method, url, data = null, successCallback, failCallbac
     // Axios 요청 설정
     const config = {
         method: method,
-        url: API_URL + url
+        url: url,
+        withCredentials: true,
     };
 
     if (isFile)
     {
         config.headers = {
-            'Authorization': `Bearer ${accessToken}`,  // 액세스 토큰을 헤더에 포함
             'Content-Type': "multipart/form-data",
         }
     }
     else
     {
         config.headers = {
-            'Authorization': `Bearer ${accessToken}`,  // 액세스 토큰을 헤더에 포함
             'Content-Type': "application/json",
         }
+    }
+
+    if (accessToken != null && accessToken.length > 0)
+    {
+        config.headers.Authorization = `Bearer ${accessToken}`;  // 액세스 토큰을 헤더에 포함
     }
 
     if (method === HttpMethod.POST || method === HttpMethod.PUT)
@@ -59,35 +50,35 @@ const apiRequest = async (method, url, data = null, successCallback, failCallbac
         config.data = data;
     }
 
-    try
+    // 요청을 보내고 응답을 받음
+    const response = await axios(config);
+
+    console.log(response)
+    console.log(response.status)
+    console.log(response.data.statusCode)
+    console.log(response.data.data)
+
+    if (response.status === 200 && response.data.statusCode === 200)
     {
-        // 요청을 보내고 응답을 받음
-        const response = await axios(config);
-
-        // successCallback 호출
-        if (successCallback) {
-            successCallback(response.data);
-        }
+        successCallback(response.data.data);
     }
-    catch (error) {
-        console.error('API 요청 오류:', error);
 
-        // 오류가 401 Unauthorized인 경우 리프레시 토큰을 사용해서 액세스 토큰을 갱신 시도
-        if (error.response && error.response.status === 401)
+    else if (response.status === 200 && response.data.statusCode >= 400)
+    {
+        // 오류가 401인 경우 refreshToken 으로 액세스 토큰 갱신
+        if (response.status === 200 && response.data.statusCode === 401)
         {
-            // 리프레시 토큰을 사용하여 액세스 토큰을 갱신하는 함수 호출
             const newAccessToken = await refreshAccessToken(refreshToken);
 
-            // 새 액세스 토큰으로 다시 요청을 시도
+            // refreshToken 으로 재발급받은 accessToken으로 재시도
             if (newAccessToken)
             {
                 const retryConfig = { ...config, headers: { 'Authorization': `Bearer ${newAccessToken}` }};
                 const retryResponse = await axios(retryConfig);
 
-                // 성공 콜백 호출
-                if (successCallback)
+                if (response.status === 200 && response.data.statusCode === 200)
                 {
-                    successCallback(retryResponse.data);
+                    successCallback(retryResponse.data.data);
                 }
             }
         }
@@ -95,7 +86,7 @@ const apiRequest = async (method, url, data = null, successCallback, failCallbac
         // 실패 콜백 호출
         if (failCallback)
         {
-            failCallback(error);
+            failCallback(response.data.data);
         }
     }
 };
@@ -105,16 +96,18 @@ const refreshAccessToken = async (refreshToken) => {
     try
     {
         const response = await axios.post(AUTH_URL + '/refresh', { refreshToken });
-        const newAccessToken = response.data.access_token;
+        const newAccessToken = response.data.accessToken;
+        const newRefreshToken = response.data.refreshToken;
 
-        // 새 액세스 토큰을 쿠키에 저장
-        document.cookie = `access_token=${newAccessToken}; path=/;`;
+        // 새 토큰 쿠키에 저장
+        setCookie("accessToken", newAccessToken);
+        setCookie("refreshToken", newRefreshToken);
 
         return newAccessToken;
     }
     catch (error)
     {
-        console.error('리프레시 토큰으로 액세스 토큰 갱신 실패:', error);
+        console.error('refresh fail : ', error);
         return null;
     }
 };
