@@ -1,12 +1,11 @@
 .loginForm {
   width: 400px;
-  height: 250px;
+  height: 400px;
 }
 .loginForm .img {
   width: 70%;
   max-height: 200px;
   margin: auto;
-  margin-top: 70px;
 }
 .loginForm .img img {
   width: 100%;
