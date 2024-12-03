@@ -1,0 +1,31 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+@media (max-width: 1400px) {
+  .header {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* 작은 화면에서 2개의 카드로 변경 */
+  }
+}
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    /* 모바일 화면에서 1개의 카드로 변경 */
+  }
+}/*# sourceMappingURL=newMain.css.map */

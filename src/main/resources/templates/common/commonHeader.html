@@ -1,45 +1,19 @@
 <header class="header">
-    <div class="headerUserInfo">
-        <div class="notLogin">
-            <div>
-                <a href="javascript:void(0)" onclick="openModal('signupModal')">회원가입</a>
-                <a href="javascript:void(0)" onclick="openModal('loginModal')">로그인</a>
-            </div>
-        </div>
-        <div class="login">
-            <div>
-                <a href="javascript:void(0)" onclick="moveToPage('/myPage')">마이페이지</a>
-                <a href="javascript:void(0)" onclick="logout()">로그아웃</a>
-            </div>
-        </div>
+    <div class="logo" onclick="moveToPage('/')">
+        <img src="./file/img/commonLogoBlack.webp" alt="">
     </div>
-    <div class="headerSearch">
-        <div class="headerLogoImg" onclick="moveToPage('')">
-            <img src="/file/img/commonLogoBlack.webp">
-        </div>
-        <div class="headerSearchBar">
-            <div class="searchBar">
-                <input type="text" placeholder="검색어를 입력해주세요.">
-            </div>
-            <div class="searchBtn">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-        </div>
+    <div class="search-bar">
+        <input type="text" placeholder="검색...">
     </div>
-    <div class="headerNavBar">
-        <nav>
-            <div>
-                <a href="">추천</a>
-            </div>
-            <div>
-                <a href="">XX</a>
-            </div>
-            <div>
-                <a href="">XX</a>
-            </div>
-            <div>
-                <a href="">XX</a>
-            </div>
-        </nav>
-    </div>
+    <nav>
+        <ul class="auth-group">
+            <!-- 로그인 상태에서 보이지 않을 항목 -->
+            <li class="auth-links logout" onclick="openModal('signupModal')"><a href="#">회원가입</a></li>
+            <li class="auth-links logout" onclick="openModal('loginModal')"><a href="#">로그인</a></li>
+
+            <!-- 비로그인 상태에서 보이지 않을 항목 -->
+            <li class="auth-links login"><a href="/myPage">마이페이지</a></li>
+            <li class="auth-links login"><a href="javascript:void(0)" onclick="logout()">로그아웃</a></li>
+        </ul>
+    </nav>
 </header>
