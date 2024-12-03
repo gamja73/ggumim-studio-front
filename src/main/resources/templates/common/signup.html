@@ -1,32 +1,20 @@
 <div id="signupModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal('signupModal')">&times;</span>
-        <div class="signUpForm">
-            <div class="title">회원가입</div>
-            <div class="inputGroup">
-                <input type="text" id="signupModalId" placeholder="아이디를 입력해주세요.">
-                <input type="password" id="signupModalPassword" placeholder="비밀번호를 입력해주세요.">
-                <input type="password" id="signupModalPasswordCheck" placeholder="비밀번호를 한번더 입력해주세요.">
-                <input type="text" id="signupModalName" placeholder="이름을 입력해주세요.">
-                <input type="text" id="signupModalCallPhone" placeholder="전화번호를 입력해주세요.">
-                <input type="text" id="signupModalEmail" placeholder="이메일주소를 입력해주세요.">
-                <input type="text" id="signupModalNickname" placeholder="닉네임을 입력해주세요.">
-                <input type="text" id="signupModalAddress" placeholder="주소를 입력해주세요.">
-                <input type="text" id="signupModalAddressDetail" placeholder="상세 주소를 입력해주세요.">
+        <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
+        <h2>회원가입</h2>
+        <form id="signupForm">
+            <input type="text" placeholder="아이디" id="signupModalId">
+            <input type="password" placeholder="비밀번호" id="signupModalPassword">
+            <input type="password" placeholder="비밀번호 확인" id="signupModalPasswordCheck">
+            <input type="text" placeholder="이름" id="signupModalName">
+            <input type="tel" placeholder="전화번호" id="signupModalCallPhone">
+            <input type="email" placeholder="이메일 주소" id="signupModalEmail">
+            <input type="text" placeholder="닉네임" id="signupModalNickname">
+            <input type="text" placeholder="주소" id="signupModalAddress">
+            <input type="text" placeholder="상세주소" id="signupModalAddressDetail">
+            <div class="modal-btn-group">
+                <button type="button" class="submit-btn" onclick="signup()">회원가입</button>
             </div>
-            <div class="signUpDocumentGroup">
-                <div>
-                    <input type="checkbox" id="document1">
-                    <label for="document1"><span class="required">[필수]</span>이용약관</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="document2">
-                    <label for="document2"><span class="required">[필수]</span>개인정보 수집 및 이용</label>
-                </div>
-            </div>
-            <div class="btnGroup">
-                <button id="signUpBtn" class="signUpBtn" onclick="signup()">회원가입</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

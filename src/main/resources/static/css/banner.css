@@ -1,0 +1,79 @@
+.banner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.banner-slider {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow: hidden;
+  height: 300px;
+}
+
+.banner-images {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.banner-slide {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #bbb;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #007bff;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+
+@media (max-width: 1400px) {
+  .banner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}/*# sourceMappingURL=banner.css.map */

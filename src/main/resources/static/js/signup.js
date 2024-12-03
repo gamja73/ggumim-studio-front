@@ -24,7 +24,7 @@ const signup = async () => {
         return;
     }
 
-    if (passwordRegExp.test(password.value))
+    if (!passwordRegExp.test(password.value))
     {
         alert("비밀번호는 숫자와 문자, 특수문자의 조합으로 만들어져야 합니다.");
         return;
@@ -54,7 +54,7 @@ const signup = async () => {
         return;
     }
 
-    if (isValidPhoneNumber(callPhone.value))
+    if (!isValidPhoneNumber(callPhone.value))
     {
         alert("전화번호 형식으로 입력해주세요. ex) 010-1234-1234")
         return;
@@ -66,7 +66,7 @@ const signup = async () => {
         return;
     }
 
-    if (isValidEmail(email.value))
+    if (!isValidEmail(email.value))
     {
         alert("이메일 형식으로 입력해주세요.");
         return;
