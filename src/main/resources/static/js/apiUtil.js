@@ -91,14 +91,17 @@ const refreshAccessToken = async (refreshToken) => {
     try
     {
         const response = await axios.post(AUTH_URL + '/refresh', { refreshToken }, { withCredentials: true });
-        const newAccessToken = response.data.accessToken;
-        const newRefreshToken = response.data.refreshToken;
+        const newAccessToken = response.data.data.accessToken;
+        const newRefreshToken = response.data.data.refreshToken;
 
         if (response.data.statusCode === 200)
         {
             // 새 토큰 쿠키에 저장
-            setCookie("accessToken", newAccessToken);
-            setCookie("refreshToken", newRefreshToken);
+            if (newAccessToken !== undefined && newRefreshToken !== undefined)
+            {
+                setCookie("accessToken", newAccessToken);
+                setCookie("refreshToken", newRefreshToken);
+            }
         }
 
         return newAccessToken;

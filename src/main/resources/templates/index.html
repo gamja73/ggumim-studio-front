@@ -31,17 +31,6 @@
 
     <!-- 상품 리스트 -->
     <div class="product-grid">
-        <div class="product-card">
-            <img src="./file/img/300.png" alt="상품 1" onerror="this.src='./imgNotFountErr.webp';">
-            <div class="product-info">
-                <div class="product-name">상품명 1</div>
-                <div class="product-price">₩50,000</div>
-            </div>
-            <div class="actions">
-                <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this)"></i>
-                <i class="fas fa-heart heart" onclick="toggleHeart(this)"></i>
-            </div>
-        </div>
     </div>
 </div>
 <th:block th:replace="~{/common/commonFooter}"></th:block>
@@ -66,7 +55,7 @@
                 limit: 8,
             },
             (data) => {
-                document.querySelector('.product-grid').innerHTML = data.itemList.map(product => {
+                document.querySelector('.product-grid').innerHTML += data.itemList.map(product => {
                     return `
                     <div class="product-card" onclick="moveToPage('/product/${product.productUID}')">
                         <img src="${product.productMainImg}" alt="상품 1" onerror="this.src='./file/img/300.png';">
