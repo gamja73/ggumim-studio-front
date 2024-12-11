@@ -53,11 +53,6 @@ const apiRequest = async (method, url, data = null, successCallback, failCallbac
     // 요청을 보내고 응답을 받음
     const response = await axios(config);
 
-    console.log(response)
-    console.log(response.status)
-    console.log(response.data.statusCode)
-    console.log(response.data.data)
-
     if (response.status === 200 && response.data.statusCode === 200)
     {
         successCallback(response.data.data);
@@ -73,7 +68,7 @@ const apiRequest = async (method, url, data = null, successCallback, failCallbac
             // refreshToken 으로 재발급받은 accessToken으로 재시도
             if (newAccessToken)
             {
-                const retryConfig = { ...config, headers: { 'Authorization': `Bearer ${newAccessToken}` }};
+                const retryConfig = { ...config, headers: { 'Authorization': `Bearer ${newAccessToken}`} };
                 const retryResponse = await axios(retryConfig);
 
                 if (response.status === 200 && response.data.statusCode === 200)
@@ -95,13 +90,16 @@ const apiRequest = async (method, url, data = null, successCallback, failCallbac
 const refreshAccessToken = async (refreshToken) => {
     try
     {
-        const response = await axios.post(AUTH_URL + '/refresh', { refreshToken });
+        const response = await axios.post(AUTH_URL + '/refresh', { refreshToken }, { withCredentials: true });
         const newAccessToken = response.data.accessToken;
         const newRefreshToken = response.data.refreshToken;
 
-        // 새 토큰 쿠키에 저장
-        setCookie("accessToken", newAccessToken);
-        setCookie("refreshToken", newRefreshToken);
+        if (response.data.statusCode === 200)
+        {
+            // 새 토큰 쿠키에 저장
+            setCookie("accessToken", newAccessToken);
+            setCookie("refreshToken", newRefreshToken);
+        }
 
         return newAccessToken;
     }

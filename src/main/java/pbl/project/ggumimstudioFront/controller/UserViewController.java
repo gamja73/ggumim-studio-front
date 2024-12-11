@@ -1,14 +1,16 @@
 package pbl.project.ggumimstudioFront.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller(value = "/")
 public class UserViewController
 {
-    @GetMapping("/")
+    @GetMapping("")
     public String mainPage()
     {
         return "index";
@@ -39,9 +41,21 @@ public class UserViewController
     }
 
     @GetMapping("/myPage/order/{orderId}")
-    public String orderDetail(@PathVariable String orderId)
+    public String orderDetail(@PathVariable(name = "orderId") String orderId)
     {
         return "orderDetail";
+    }
+
+    @RequestMapping("/product/{productUID}")
+    public String productDetail(@PathVariable(name = "productUID") String productUID)
+    {
+        return "";
+    }
+
+    @GetMapping("/order/test")
+    public String orderTestPage()
+    {
+        return "orderTest2";
     }
 
 

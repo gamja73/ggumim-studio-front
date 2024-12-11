@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<button id="checkoutButton" type="button" onclick="onclickEvent()">결제</button>
+</body>
+<script type="text/javascript" src="/js/payment.js"></script>+
+<script>
+    async function onclickEvent ()
+    {
+        await Payment({
+            paymentId: "20241211-00000001", // 결제 ID
+            storeId: "store-8f5d53c5-787a-4c9e-9850-a97b1350ad73", // 상점 ID
+            channelKey: "channel-key-8f6cc071-947f-44b9-8e69-88e1bd123f16", // 채널 ID
+            orderName: "상품명1", // 상품명
+            totalAmount: 100, // 주문 금액
+            currency: "KRW", // 통화
+            payMethod: "CARD", // 결제방식
+            customData: { // 커스텀데이터 (안써도됨)
+                item: "커스텀 데이터 아이템명",
+            },
+        })
+    }
+    // const item = {
+    //     paymentId: "20241210-00000001", // 결제 ID
+    //     storeId: "store-e4038486-8d83-41a5-acf1-844a009e0d94", // 스토어 ID
+    //     channelKey: "channel-key-ebe7daa6-4fe4-41bd-b17d-3495264399b5", // 채널 ID
+    //     orderName: "주문명", // 주문명
+    //     totalAmount: 100, // 주문 금액
+    //     currency: "KRW", // 통화
+    //     payMethod: "CARD", // 결제방식
+    //     customData: { // 커스텀데이터 (안써도됨)
+    //         item: "커스텀 데이터 아이템명",
+    //     },
+    // }
+
+</script>
+</html>
