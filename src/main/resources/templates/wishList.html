@@ -1,4 +1,8 @@
 <th:block th:replace="~{/common/commonHead}"></th:block>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/myPage.css">
+    <link rel="stylesheet" type="text/css" href="/css/wishList.css">
+</head>
 <body>
 <th:block th:replace="~{/common/commonHeader}"></th:block>
 <div class="myPageContent" data-items="2">
@@ -22,93 +26,21 @@
         <div class="topContent">
             <div class="title">찜 목록</div>
             <div class="btnGroup">
-                <button class="btn btnBlack">장바구니에 추가</button>
+                <button class="btn btnBlack" onclick="postShoppingCart()">장바구니에 추가</button>
             </div>
         </div>
         <hr class="line">
         <div class="wishListItems">
-            <div class="item">
-                <div class="itemCheckBox" tabindex="0">
-                    <div class="checkbox"></div>
-                </div>
-                <div class="productImg">
-                    <img src="/file/img/testImg.jpg" alt="">
-                </div>
-                <div class="productInfo">
-                    <div class="productName">테스트 상품</div>
-                    <div class="productAmount">가격 : XX,XXX원</div>
-                </div>
-                <div class="itemButtonGroup">
-                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="itemCheckBox" tabindex="0">
-                    <div class="checkbox"></div>
-                </div>
-                <div class="productImg">
-                    <img src="/file/img/testImg.jpg" alt="">
-                </div>
-                <div class="productInfo">
-                    <div class="productName">테스트 상품</div>
-                    <div class="productAmount">가격 : XX,XXX원</div>
-                </div>
-                <div class="itemButtonGroup">
-                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="itemCheckBox" tabindex="0">
-                    <div class="checkbox"></div>
-                </div>
-                <div class="productImg">
-                    <img src="/file/img/testImg.jpg" alt="">
-                </div>
-                <div class="productInfo">
-                    <div class="productName">테스트 상품</div>
-                    <div class="productAmount">가격 : XX,XXX원</div>
-                </div>
-                <div class="itemButtonGroup">
-                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="itemCheckBox" tabindex="0">
-                    <div class="checkbox"></div>
-                </div>
-                <div class="productImg">
-                    <img src="/file/img/testImg.jpg" alt="">
-                </div>
-                <div class="productInfo">
-                    <div class="productName">테스트 상품</div>
-                    <div class="productAmount">가격 : XX,XXX원</div>
-                </div>
-                <div class="itemButtonGroup">
-                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="itemCheckBox" tabindex="0">
-                    <div class="checkbox"></div>
-                </div>
-                <div class="productImg">
-                    <img src="/file/img/testImg.jpg" alt="">
-                </div>
-                <div class="productInfo">
-                    <div class="productName">테스트 상품</div>
-                    <div class="productAmount">가격 : XX,XXX원</div>
-                </div>
-                <div class="itemButtonGroup">
-                    <div class="deleteBtn"><i class="fa-solid fa-x"></i></div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 <th:block th:replace="~{/common/commonFooter}"></th:block>
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+        await myPage();
+        await wishList();
+
         const itemCheckBoxList = document.querySelectorAll(".itemCheckBox");
 
         itemCheckBoxList.forEach(itemCheckBox => {
@@ -117,5 +49,104 @@
             });
         })
     })
+
+    const wishList = async (page = 1) => {
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/user/myPage/wish",
+            {
+                page: page,
+                limit: 8,
+            },
+            (data) => {
+                document.querySelector('.wishListItems').innerHTML += data.itemList.map(item => {
+                    return `
+                    <div class="item" wishListUID="${item.wishListUID}">
+                        <div class="itemCheckBox" tabindex="0">
+                            <div class="checkbox"></div>
+                        </div>
+                        <div class="productImg">
+                            <img src="${item.productMainImg}" alt="">
+                        </div>
+                        <div class="productInfo">
+                            <div class="productName">${item.productName}</div>
+                            <div class="productAmount">가격 : ${item.productPrice}원</div>
+                        </div>
+                        <div class="itemButtonGroup">
+                            <div class="deleteBtn"><i class="fa-solid fa-x" onclick="toggleHeart(${item.productUID})"></i></div>
+                        </div>
+                    </div>`
+                }).join('');
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
+
+    const toggleHeart = async (productUID) => {
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/user/wish",
+            {
+                productUID: productUID,
+            },
+            (data) => {
+                alert(data);
+                location.reload();
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
+
+    const postShoppingCart = async () => {
+        const productUIDList = [];
+        const wishListItemList = document.querySelectorAll('.wishListItems > .item');
+
+        wishListItemList.forEach(shoppingCartItem => {
+            const itemCheckBox = shoppingCartItem.querySelector(".itemCheckBox");
+
+            if (itemCheckBox.classList.contains('checked'))
+            {
+                productUIDList.push(shoppingCartItem.getAttribute('wishListUID'));
+            }
+        })
+
+        if (productUIDList.length === 0)
+        {
+            alert("상품을 선택 후 추가 가능합니다.");
+            return;
+        }
+
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/user/shoppingCart/list",
+            {
+                productUIDList: productUIDList,
+            },
+            (data) => {
+                alert(data.success + "건 성공 / " + data.fail + "건 실패");
+                window.location.reload();
+            },
+            (error) => {
+                alert(error);
+            });
+    }
+
+    const myPage = async () => {
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/user/myPage",
+            {},
+            (data) => {
+                document.querySelector('.leftSideTop .userName').innerText = data.userName + " 님";
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
 </script>
 <th:block th:replace="~{/common/commonFoot}"></th:block>

@@ -13,11 +13,23 @@
   margin: 0 auto;
   overflow: hidden;
   height: 300px;
+  background-color: #E1E1E1;
 }
 
 .banner-images {
+  height: 100%;
   display: flex;
   transition: transform 0.5s ease;
+}
+
+.banner-image {
+  flex-shrink: 0;
+  flex-basis: 100%;
+}
+
+.banner-image img {
+  height: 100%;
+  object-fit: scale-down;
 }
 
 .banner-slide {

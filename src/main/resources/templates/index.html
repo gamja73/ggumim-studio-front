@@ -11,9 +11,15 @@
     <div class="banner">
         <div class="banner-slider">
             <div class="banner-images">
-                <img src="./file/img/1400x300.png" alt="배너 1" class="banner-slide">
-                <img src="./file/img/1400x300.png" alt="배너 2" class="banner-slide">
-                <img src="./file/img/1400x300.png" alt="배너 3" class="banner-slide">
+                <div class="banner-image">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_001.jpg" alt="배너 1" class="banner-slide">
+                </div>
+                <div class="banner-image">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_002.jpg" alt="배너 2" class="banner-slide">
+                </div>
+                <div class="banner-image">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_003.jpg" alt="배너 3" class="banner-slide">
+                </div>
             </div>
             <!-- 페이지네이션 -->
             <div class="pagination"></div>
@@ -25,89 +31,83 @@
 
     <!-- 상품 리스트 -->
     <div class="product-grid">
-        <div class="product-card">
-            <img src="./file/img/300.png" alt="상품 1" onerror="this.src='./imgNotFountErr.webp';">
-            <div class="product-info">
-                <div class="product-name">상품명 1</div>
-                <div class="product-price">₩50,000</div>
-            </div>
-            <div class="actions">
-                <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this)"></i>
-                <i class="fas fa-heart heart" onclick="toggleHeart(this)"></i>
-            </div>
-        </div>
-        <!-- 추가 상품들 -->
-        <div class="product-card">
-            <img src="./file/img/300.png" alt="상품 2" onerror="this.src='./imgNotFountErr.webp';">
-            <div class="product-info">
-                <div class="product-name">상품명 2</div>
-                <div class="product-price">₩40,000</div>
-            </div>
-            <div class="actions">
-                <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this)"></i>
-                <i class="fas fa-heart heart" onclick="toggleHeart(this)"></i>
-            </div>
-        </div>
-        <div class="product-card">
-            <img src="./file/img/300.png" alt="상품 1" onerror="this.src='./imgNotFountErr.webp';">
-            <div class="product-info">
-                <div class="product-name">상품명 1</div>
-                <div class="product-price">₩50,000</div>
-            </div>
-            <div class="actions">
-                <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this)"></i>
-                <i class="fas fa-heart heart" onclick="toggleHeart(this)"></i>
-            </div>
-        </div>
-        <div class="product-card">
-            <img src="./file/img/300.png" alt="상품 1" onerror="this.src='./imgNotFountErr.webp';">
-            <div class="product-info">
-                <div class="product-name">상품명 1</div>
-                <div class="product-price">₩50,000</div>
-            </div>
-            <div class="actions">
-                <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this)"></i>
-                <i class="fas fa-heart heart" onclick="toggleHeart(this)"></i>
-            </div>
-        </div>
-        <div class="product-card">
-            <img src="./file/img/300.png" alt="상품 1" onerror="this.src='./imgNotFountErr.webp';">
-            <div class="product-info">
-                <div class="product-name">상품명 1</div>
-                <div class="product-price">₩50,000</div>
-            </div>
-            <div class="actions">
-                <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this)"></i>
-                <i class="fas fa-heart heart" onclick="toggleHeart(this)"></i>
-            </div>
-        </div>
-        <div class="product-card">
-            <img src="./file/img/300.png" alt="상품 1" onerror="this.src='./imgNotFountErr.webp';">
-            <div class="product-info">
-                <div class="product-name">상품명 1</div>
-                <div class="product-price">₩50,000</div>
-            </div>
-            <div class="actions">
-                <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this)"></i>
-                <i class="fas fa-heart heart" onclick="toggleHeart(this)"></i>
-            </div>
-        </div>
-        <div class="product-card">
-            <img src="./file/img/300.png" alt="상품 1" onerror="this.src='./imgNotFountErr.webp';">
-            <div class="product-info">
-                <div class="product-name">상품명 1</div>
-                <div class="product-price">₩50,000</div>
-            </div>
-            <div class="actions">
-                <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this)"></i>
-                <i class="fas fa-heart heart" onclick="toggleHeart(this)"></i>
-            </div>
-        </div>
     </div>
 </div>
 <th:block th:replace="~{/common/commonFooter}"></th:block>
 </body>
 <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        await productList();
+    })
 
+    // 배너 초기화
+    const bannerSlider = new BannerSlider('.banner-slider', {
+        autoplayInterval: 5000,
+        loop: true,
+    });
+
+    const productList = async (page = 1) => {
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/product/list",
+            {
+                page: page,
+                limit: 8,
+            },
+            (data) => {
+                document.querySelector('.product-grid').innerHTML += data.itemList.map(product => {
+                    return `
+                    <div class="product-card">
+                        <img src="${product.productMainImg}" alt="상품 1" onerror="this.src='./file/img/300.png';" onclick="moveToPage('/product/${product.productUID}')">
+                        <div class="product-info">
+                            <div class="product-name">${product.productName}</div>
+                            <div class="product-price">₩${product.productPrice}</div>
+                        </div>
+                        <div class="actions">
+                            <i class="fa-solid fa-cart-shopping cart ${product.shoppingCart ? 'active' : ''}" onclick="toggleCart(${product.productUID})"></i>
+                            <i class="fas fa-heart heart ${product.wishList ? 'active' : ''}" onclick="toggleHeart(${product.productUID})"></i>
+                        </div>
+                    </div>`
+                }).join('');
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
+
+    const toggleCart = async (productUID) => {
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/user/shoppingCart",
+            {
+                productUID: productUID,
+            },
+            (data) => {
+                alert(data);
+                location.reload();
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
+
+    const toggleHeart = async (productUID) => {
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/user/wish",
+            {
+                productUID: productUID,
+            },
+            (data) => {
+                alert(data);
+                location.reload();
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
 </script>
 <th:block th:replace="~{/common/commonFoot}"></th:block>
