@@ -112,6 +112,25 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        await myPage();
+    })
+
+    const myPage = async () => {
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/user/myPage",
+            {},
+            (data) => {
+                document.querySelector('.leftSideTop .userName').innerText = data.userName + " 님";
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
+</script>
 <th:block th:replace="~{/common/commonFooter}"></th:block>
 </body>
 <th:block th:replace="~{/common/commonFoot}"></th:block>

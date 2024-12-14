@@ -12,13 +12,13 @@
         <div class="banner-slider">
             <div class="banner-images">
                 <div class="banner-image">
-                    <img src="./file/img/300.png" alt="배너 1" class="banner-slide">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_001.jpg" alt="배너 1" class="banner-slide">
                 </div>
                 <div class="banner-image">
-                    <img src="./file/img/1400x300.png" alt="배너 2" class="banner-slide">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_002.jpg" alt="배너 2" class="banner-slide">
                 </div>
                 <div class="banner-image">
-                    <img src="./file/img/1400x300.png" alt="배너 3" class="banner-slide">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_003.jpg" alt="배너 3" class="banner-slide">
                 </div>
             </div>
             <!-- 페이지네이션 -->
@@ -57,21 +57,55 @@
             (data) => {
                 document.querySelector('.product-grid').innerHTML += data.itemList.map(product => {
                     return `
-                    <div class="product-card" onclick="moveToPage('/product/${product.productUID}')">
-                        <img src="${product.productMainImg}" alt="상품 1" onerror="this.src='./file/img/300.png';">
+                    <div class="product-card">
+                        <img src="${product.productMainImg}" alt="상품 1" onerror="this.src='./file/img/300.png';" onclick="moveToPage('/product/${product.productUID}')">
                         <div class="product-info">
                             <div class="product-name">${product.productName}</div>
                             <div class="product-price">₩${product.productPrice}</div>
                         </div>
                         <div class="actions">
-                            <i class="fa-solid fa-cart-shopping cart" onclick="toggleCart(this, ${product.productUID})"></i>
-                            <i class="fas fa-heart heart" onclick="toggleHeart(this, ${product.productUID})"></i>
+                            <i class="fa-solid fa-cart-shopping cart ${product.shoppingCart ? 'active' : ''}" onclick="toggleCart(${product.productUID})"></i>
+                            <i class="fas fa-heart heart ${product.wishList ? 'active' : ''}" onclick="toggleHeart(${product.productUID})"></i>
                         </div>
                     </div>`
                 }).join('');
             },
             (error) => {
                 console.log(error);
+            }
+        )
+    }
+
+    const toggleCart = async (productUID) => {
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/user/shoppingCart",
+            {
+                productUID: productUID,
+            },
+            (data) => {
+                alert(data);
+                location.reload();
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
+
+    const toggleHeart = async (productUID) => {
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/user/wish",
+            {
+                productUID: productUID,
+            },
+            (data) => {
+                alert(data);
+                location.reload();
+            },
+            (error) => {
+                alert(error);
             }
         )
     }

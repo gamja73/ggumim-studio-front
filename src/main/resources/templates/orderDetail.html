@@ -127,6 +127,7 @@
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        await myPage();
         const itemCheckBoxList = document.querySelectorAll(".itemCheckBox");
 
         itemCheckBoxList.forEach(itemCheckBox => {
@@ -135,5 +136,19 @@
             });
         })
     })
+
+    const myPage = async () => {
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/user/myPage",
+            {},
+            (data) => {
+                document.querySelector('.leftSideTop .userName').innerText = data.userName + " 님";
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
 </script>
 <th:block th:replace="~{/common/commonFoot}"></th:block>

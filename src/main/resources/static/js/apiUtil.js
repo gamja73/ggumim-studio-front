@@ -20,38 +20,17 @@ const getAuthTokens = () => {
 const apiRequest = async (method, url, data = null, successCallback, failCallback, isFile = false) => {
     const { accessToken, refreshToken } = getAuthTokens();
 
-    // Axios 요청 설정
-    const config = {
-        method: method,
-        url: url,
-        withCredentials: true,
+    const headers = {
+        "Content-Type": isFile ? "multipart/form-data" : "application/json",
     };
-
-    if (isFile)
-    {
-        config.headers = {
-            'Content-Type': "multipart/form-data",
-        }
-    }
-    else
-    {
-        config.headers = {
-            'Content-Type': "application/json",
-        }
-    }
 
     if (accessToken != null && accessToken.length > 0)
     {
-        config.headers.Authorization = `Bearer ${accessToken}`;  // 액세스 토큰을 헤더에 포함
-    }
-
-    if (method === HttpMethod.POST || method === HttpMethod.PUT)
-    {
-        config.data = data;
+        headers.Authorization = `Bearer ${accessToken}`;
     }
 
     // 요청을 보내고 응답을 받음
-    const response = await axios(config);
+    const response = await sendApi(headers, method, url, data);
 
     if (response.status === 200 && response.data.statusCode === 200)
     {
@@ -68,10 +47,10 @@ const apiRequest = async (method, url, data = null, successCallback, failCallbac
             // refreshToken 으로 재발급받은 accessToken으로 재시도
             if (newAccessToken)
             {
-                const retryConfig = { ...config, headers: { 'Authorization': `Bearer ${newAccessToken}`} };
-                const retryResponse = await axios(retryConfig);
+                headers.Authorization = `Bearer ${newAccessToken}`;
+                const retryResponse = await sendApi(headers, method, url, data);
 
-                if (response.status === 200 && response.data.statusCode === 200)
+                if (retryResponse.status === 200 && retryResponse.data.statusCode === 200)
                 {
                     successCallback(retryResponse.data.data);
                 }
@@ -112,6 +91,32 @@ const refreshAccessToken = async (refreshToken) => {
         return null;
     }
 };
+
+async function sendApi(headers, type, url, jsonData = {})
+{
+    try
+    {
+        switch (type)
+        {
+            case HttpMethod.GET:
+                return await axios.get(url, {headers: headers, params: jsonData, withCredentials: true});
+            case HttpMethod.POST:
+                return await axios.post(url, JSON.stringify(jsonData), {headers, withCredentials: true},);
+            case HttpMethod.PUT:
+                return await axios.put(url, JSON.stringify(jsonData), {headers, withCredentials: true});
+            case HttpMethod.DELETE:
+                return  await axios.delete(url, JSON.stringify(jsonData), {headers, withCredentials: true});
+        }
+
+        return null;
+    }
+    catch (error)
+    {
+        console.error("Error in sendApi > ", error);
+        throw error;
+    }
+}
+
 
 const fileUpload = async (input) => {
     const file = input.files[0];

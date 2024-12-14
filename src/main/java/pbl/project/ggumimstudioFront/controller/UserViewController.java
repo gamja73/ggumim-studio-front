@@ -46,10 +46,20 @@ public class UserViewController
         return "orderDetail";
     }
 
-    @RequestMapping("/product/{productUID}")
-    public String productDetail(@PathVariable(name = "productUID") String productUID)
+    @GetMapping("/product/{productUID}")
+    public String productDetail(@PathVariable(name = "productUID") String productUID, Model model)
     {
-        return "";
+        model.addAttribute("productUID", productUID);
+
+        return "productDetail";
+    }
+
+    @GetMapping("/order/payment/{orderID}")
+    public String orderPayment(@PathVariable(name = "orderID") String orderID, Model model)
+    {
+        model.addAttribute("orderID", orderID);
+
+        return "orderPayment";
     }
 
     @GetMapping("/order/test")
