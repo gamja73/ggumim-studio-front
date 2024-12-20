@@ -38,6 +38,7 @@ const Payment = async (item) => {
             if (paymentComplete.status === "PAID") {
                 console.log(paymentComplete)
             }
+            alert("결제가 완료되었습니다.");
         } else {
             console.log(await completeResponse.text());
         }

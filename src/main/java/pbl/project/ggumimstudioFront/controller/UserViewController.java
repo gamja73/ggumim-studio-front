@@ -41,8 +41,10 @@ public class UserViewController
     }
 
     @GetMapping("/myPage/order/{orderId}")
-    public String orderDetail(@PathVariable(name = "orderId") String orderId)
+    public String orderDetail(@PathVariable(name = "orderId") String orderId, Model model)
     {
+        model.addAttribute("orderId", orderId);
+
         return "orderDetail";
     }
 
