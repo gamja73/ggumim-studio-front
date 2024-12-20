@@ -1,0 +1,78 @@
+.myPageCenterContent .orderDetailContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.myPageCenterContent .orderDetailContainer .infoText {
+  width: 90%;
+  margin: auto;
+  display: grid;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  grid-template-columns: 150px auto;
+}
+.myPageCenterContent .orderDetailContainer .infoText .key {
+  font-weight: bold;
+  text-align: left;
+}
+.myPageCenterContent .orderDetailContainer .infoText .value {
+  text-align: left;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList {
+  width: 97%;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItemTitle {
+  font-size: 14px;
+  font-weight: bold;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItemLine {
+  border: 1px solid #a5a5a5;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItems {
+  width: 100%;
+  margin: auto;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItems .item {
+  display: grid;
+  grid-template-columns: 110px auto 100px;
+  width: 100%;
+  height: 130px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItems .item .productImg {
+  width: 100px;
+  height: 100px;
+  margin-left: 10px;
+  border: 1px solid #a5a5a5;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItems .item .productImg img {
+  width: 100%;
+  height: 100%;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItems .item .productInfo {
+  width: 100%;
+  margin-left: 20px;
+  height: 120px;
+  margin-top: 10px;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItems .item .productInfo .productName {
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+}
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItems .item .productInfo .productOption,
+.myPageCenterContent .orderDetailContainer .orderItemList .orderItems .item .productInfo .productAmount {
+  margin-left: 10px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+}/*# sourceMappingURL=orderDetail.css.map */

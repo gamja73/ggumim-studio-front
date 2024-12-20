@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @ControllerAdvice
 public class GlobalWebExceptionHandler
@@ -17,5 +18,9 @@ public class GlobalWebExceptionHandler
         modelAndView.setStatus(HttpStatus.NOT_FOUND);
         modelAndView.addObject("message", "페이지를 찾을 수 없습니다.");
         return modelAndView;
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public void handleNoResourceFoundException(NoResourceFoundException ex) {
     }
 }

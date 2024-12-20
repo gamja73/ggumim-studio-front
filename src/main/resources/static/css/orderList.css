@@ -1,0 +1,58 @@
+.myPageCenterContent .orderList {
+  width: 90%;
+  margin: auto;
+}
+.myPageCenterContent .orderList .item {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  display: flex;
+  margin-bottom: 10px;
+  min-height: 120px;
+  max-height: 140px;
+}
+.myPageCenterContent .orderList .item .productImg {
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+}
+.myPageCenterContent .orderList .item .productImg img {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #a5a5a5;
+}
+.myPageCenterContent .orderList .item .orderInfo {
+  display: flex;
+  place-items: center;
+  width: 85%;
+}
+.myPageCenterContent .orderList .item .orderInfo .information {
+  padding-left: 20px;
+  width: 80%;
+}
+.myPageCenterContent .orderList .item .orderInfo .information .orderStatus {
+  color: #51ff00;
+  font-weight: bold;
+}
+.myPageCenterContent .orderList .item .orderInfo .information .productName {
+  font-weight: bold;
+}
+.myPageCenterContent .orderList .item .orderInfo .information .productCount,
+.myPageCenterContent .orderList .item .orderInfo .information .orderAmount {
+  padding-left: 30px;
+}
+.myPageCenterContent .orderList .item .orderInfo .detailBtn {
+  width: 20%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.myPageCenterContent .orderList .item .orderInfo .detailBtn button {
+  padding: 5px;
+  font-size: 14px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid #a5a5a5;
+}
+.myPageCenterContent .orderList .item .orderInfo .detailBtn button:hover {
+  background-color: #a5a5a5;
+}/*# sourceMappingURL=orderList.css.map */

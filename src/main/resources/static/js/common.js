@@ -1,13 +1,17 @@
 document.addEventListener("DOMContentLoaded", () =>{
-    const headerUserInfo = document.querySelector(".headerUserInfo");
+    const headerUserInfo = document.querySelector(".auth-group");
 
     if (getCookie("accessToken") != null)
     {
-        headerUserInfo.querySelector(".login").classList.add("active");
+        headerUserInfo.querySelectorAll(".login").forEach(element => {
+            element.classList.add("active");
+        });
     }
     else
     {
-        headerUserInfo.querySelector(".notLogin").classList.add("active");
+        headerUserInfo.querySelectorAll(".logout").forEach(element => {
+            element.classList.add("active");
+        });
     }
 })
 

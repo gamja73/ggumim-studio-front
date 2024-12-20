@@ -1,69 +1,82 @@
-const bennerInrervalTime = 5000; // 배너 업데이트 대기시간 (5000ms = 5sec)
+class BannerSlider {
+    constructor(selector, options = {}) 
+    {
+        this.container = document.querySelector(selector);
+        this.slides = this.container.querySelectorAll('.banner-slide');
+        this.dotsContainer = this.container.querySelector('.pagination');
+        this.totalSlides = this.slides.length;
+        this.currentSlide = 0;
 
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.bannerContainer');
-    const bannerList = container.querySelector('.bannerList');
-    const banners = bannerList.querySelectorAll('.bannerItem');
-    const paginationContainer = container.querySelector('.pagination');
-    const prevButton = container.querySelector('.prevButton');
-    const nextButton = container.querySelector('.nextButton');
-    const totalBanners = banners.length;
-    let currentIndex = 0;
-    let interval;
+        this.autoplayInterval = options.autoplayInterval || 3000;
+        this.loop = options.loop || true;
 
-    // 배너 리스트의 전체 너비 설정
-    bannerList.style.width = `${container.clientWidth * totalBanners}px`;
-
-    // 페이지네이션 버튼 생성
-    for (let i = 0; i < totalBanners; i++) {
-        const button = document.createElement('button');
-        button.classList.add('pagination-button');
-        button.textContent = i + 1;
-        button.addEventListener('click', () => {
-            currentIndex = i;
-            updateUI();
-        });
-        paginationContainer.appendChild(button);
+        // 초기화
+        this.init();
     }
 
-    // 이전 및 다음 버튼 클릭 이벤트 핸들러
-    const navigate = (direction) => {
-        currentIndex = (currentIndex + direction + totalBanners) % totalBanners;
-        updateUI();
-    };
+    init() 
+    {
+        this.setupPagination();
+        this.setupArrows();
+        this.startAutoplay();
+        this.updateSlider();
+    }
 
-    prevButton.addEventListener('click', () => navigate(-1));
-    nextButton.addEventListener('click', () => navigate(1));
+    // 슬라이드 전환 함수
+    changeSlide(index) 
+    {
+        this.currentSlide = (index + this.totalSlides) % this.totalSlides;
+        this.updateSlider();
+    }
 
-    // UI 업데이트 함수
-    const updateUI = () => {
-        updateBannerPosition();
-        updatePaginationButtons();
-        clearInterval(interval);
-        interval = getInterval();
-    };
+    // 슬라이더 업데이트 함수
+    updateSlider() 
+    {
+        // 이미지 슬라이드 이동
+        const offset = this.currentSlide * 100;
+        this.container.querySelector('.banner-images').style.transform = `translateX(-${offset}%)`;
 
-    // 배너 위치 업데이트
-    const updateBannerPosition = () => {
-        bannerList.style.marginLeft = `-${container.clientWidth * currentIndex}px`;
-    };
+        // 페이지네이션 업데이트
+        this.dots.forEach(dot => dot.classList.remove('active'));
+        this.dots[this.currentSlide].classList.add('active');
+    }
 
-    // 페이지네이션 버튼 활성화 상태 업데이트
-    const updatePaginationButtons = () => {
-        const buttons = container.querySelectorAll('.pagination button');
-        buttons.forEach((button, index) => {
-            button.classList.toggle('active', index === currentIndex);
-        });
-    };
+    // 자동 슬라이드 시작
+    startAutoplay() 
+    {
+        setInterval(() => {
+            if (this.loop) 
+            {
+                this.changeSlide(this.currentSlide + 1);
+            }
+        }, this.autoplayInterval);
+    }
 
-    // 배너 업데이트
-    const getInterval = () => {
-        return setInterval(() => {
-            currentIndex = (currentIndex + 1) % totalBanners;
-            updateUI();
-        }, bennerInrervalTime);
-    };
+    // 페이지네이션 생성
+    setupPagination() 
+    {
+        this.dotsContainer.innerHTML = ''; // 기존 페이지네이션 삭제
+        this.dots = [];
 
-    interval = getInterval();
-    updatePaginationButtons();
-});
+        // 페이지네이션 버튼 추가
+        for (let i = 0; i < this.totalSlides; i++) 
+        {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.setAttribute('data-slide', i);
+            dot.addEventListener('click', () => this.changeSlide(i));
+            this.dotsContainer.appendChild(dot);
+            this.dots.push(dot);
+        }
+    }
+
+    // 화살표 네비게이션 설정
+    setupArrows() 
+    {
+        const leftArrow = this.container.querySelector('.left-arrow');
+        const rightArrow = this.container.querySelector('.right-arrow');
+
+        leftArrow.addEventListener('click', () => this.changeSlide(this.currentSlide - 1));
+        rightArrow.addEventListener('click', () => this.changeSlide(this.currentSlide + 1));
+    }
+}

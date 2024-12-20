@@ -26,6 +26,7 @@ const login = async () => {
         (res) => {
             setCookie("accessToken", res.accessToken);
             setCookie("refreshToken", res.refreshToken);
+            alert("로그인 완료!");
             location.reload();
         },
         (err) => {

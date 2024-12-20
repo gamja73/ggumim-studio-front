@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset='UTF-8'>
+    <title>꾸밈 스튜디오</title>
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/axios.min.js"></script>
+    <script type="text/javascript" src="/js/apiUtil.js"></script>
+    <script type="text/javascript" src="/js/commonUtil.js"></script>
+    <script type="text/javascript" src="/js/sha256.js"></script>
+    <script type="text/javascript" src="/js/fontAwesome.js"></script>
+    <script type="text/javascript" src="/js/payment.js"></script>
+</head>
+<body>
+<input type="hidden" id="paymentID" th:value="${orderID}">
+<div class="order-page">
+    <h1>상품 주문서</h1>
+
+    <div class="product-list"></div>
+
+    <div class="total">
+        <span class="total-label">총 결제금액</span>
+        <span class="total-amount"></span>
+    </div>
+
+    <button class="order-btn" onclick="payment()">결제하기</button>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        await orderDetail();
+    })
+
+    const orderDetail = async () => {
+        const paymentID = document.getElementById('paymentID').value;
+
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/order/"+ paymentID,
+            {},
+            (res) => {
+                const productList = document.querySelector(".product-list");
+
+                productList.innerHTML = res.orderItemList.map(item => {
+                    return `
+                    <div class="product-item">
+                        <img src="${item.productMainImg}" class="product-image"/>
+                        <div class="product-info">
+                            <span class="product-name">${item.productName}</span>
+                            <span class="product-quantity">${item.quantity} 개</span>
+                            <span class="product-price">${item.price} 원 (개당)</span>
+                        </div>
+                    </div>`
+                }).join("");
+
+                document.querySelector(".total-amount").innerHTML = res.totalPrice + " 원";
+            }
+        )
+    }
+
+    const payment = async () => {
+        const paymentID = document.getElementById('paymentID').value;
+
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/payment/" + paymentID,
+            {},
+            async (res) => {
+                await Payment(res);
+                await paymentComplete();
+            },
+            (err) => {
+                alert(err.message);
+            })
+    }
+
+    const paymentComplete = async () => {
+        const paymentID = document.getElementById('paymentID').value;
+
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/payment/complete/" + paymentID,
+            {},
+            (res) => {
+                if (res)
+                {
+                    window.location.href = "/myPage/order/list";
+                }
+                else
+                {
+                    alert("결제가 실패하였습니다.");
+                    window.location.href = "";
+                }
+            },
+            (err) => {
+                alert(err.message);
+            })
+    }
+</script>
+<th:block th:replace="~{/common/commonFoot}"></th:block>
