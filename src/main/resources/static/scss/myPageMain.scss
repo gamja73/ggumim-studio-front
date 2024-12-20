@@ -1,0 +1,126 @@
+$global-border-color: #a5a5a5;
+$global-hover-color: #a5a5a5;
+$mypage-selected-color: #51ff00;
+$mypage-non-selected-color: #616161;
+$color-white: #ffffff;
+$color-black: #000000;
+$color-gray: #696969;
+
+.myPageCenterContent .myPageMainTopBox {
+    width: 100%;
+    min-height: 100px;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .box {
+        width: 90%;
+        height: 100%;
+        max-width: 400px;
+        border: 1px solid $global-border-color;
+        display:grid;
+        align-items:center;
+
+        .topText {
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .text {
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+        }
+    }
+}
+
+// 최근 주문 목록
+.myPageCenterContent .recentOrderList {
+    margin-bottom: 50px;
+
+    .title  {
+        margin-left: 5%;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .line {
+        width: 90%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .itemList {
+        width: 90%;
+        margin: auto;
+        row-gap: 20px;
+
+        .item {
+            border: 1px solid $global-border-color;
+            border-radius: 10px;
+            display: flex;
+            margin-bottom: 10px;
+            min-height: 120px;
+            max-height: 140px;
+
+            .productImg {
+                width: 120px;
+                height: 120px;
+                padding: 10px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border: 1px solid $global-border-color;
+                }
+            }
+            
+            .orderInfo {
+                display: flex;
+                place-items: center;
+                width: 85%;
+
+                .information {
+                    padding-left: 20px;
+                    width: 80%;
+
+                    .orderStatus {
+                        color: #51ff00;
+                        font-weight: bold;
+                    }
+
+                    .productName {
+                        font-weight: bold;
+                    }
+
+                    .productCount, 
+                    .orderAmount {
+                        padding-left: 30px;
+                    }
+                }
+
+                .detailBtn {
+                    width: 20%;
+
+                    button {
+                        padding: 5px;
+                        font-size: 14px;
+                        margin-right: 20px;
+                        border-radius: 10px;
+                        border: 1px solid $global-border-color;
+                        background-color: $color-white;
+
+                        &:hover {
+                            background-color: $global-hover-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

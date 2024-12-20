@@ -1,4 +1,8 @@
 <th:block th:replace="~{/common/commonHead}"></th:block>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/myPage.css">
+    <link rel="stylesheet" type="text/css" href="/css/orderDetail.css">
+</head>
 <body>
 <th:block th:replace="~{/common/commonHeader}"></th:block>
 <div class="myPageContent" data-items="2">
@@ -14,8 +18,6 @@
             <div class="" onclick="moveToPage('/myPage/shoppingCart')">장바구니</div>
             <div class="" onclick="moveToPage('/myPage/wishList')">찜목록</div>
             <div class="selected" onclick="moveToPage('/myPage/order/list')">주문</div>
-            <div class="" onclick="moveToPage('/myPage/order/1')">문의</div>
-            <div class="" onclick="moveToPage('/')">회원정보변경</div>
         </div>
     </div>
     <div class="myPageCenterContent">
@@ -29,107 +31,96 @@
         <div class="orderDetailContainer">
             <div class="infoText">
                 <div class="key">주문번호</div>
-                <div class="value">YYYYMMDD-XXXXXXXX</div>
+                <div class="value" id="orderId"></div>
             </div>
             <div class="infoText">
                 <div class="key">주문일시</div>
-                <div class="value">YYYY-MM-DD HH:MM:SS</div>
+                <div class="value" id="createdAt"></div>
             </div>
             <div class="infoText">
                 <div class="key">주문금액</div>
-                <div class="value">XX,XXX원</div>
+                <div class="value" id="orderAmount"></div>
             </div>
             <div class="infoText">
                 <div class="key">결제금액</div>
-                <div class="value">XX,XXX원</div>
+                <div class="value" id="paymentAmount"></div>
             </div>
             <div class="infoText">
                 <div class="key">결제방식</div>
-                <div class="value">신용카드</div>
-            </div>
-            <div class="infoText">
-                <div class="key">사용 적립금</div>
-                <div class="value">XX,XXXP</div>
+                <div class="value" id="paymentMethod"></div>
             </div>
             <div class="infoText">
                 <div class="key">주문 상태</div>
-                <div class="value">결제완료</div>
+                <div class="value" id="orderStatus"></div>
             </div>
             <div class="orderItemList">
                 <div class="orderItemTitle">주문 상품 목록</div>
                 <hr class="orderItemLine">
-                <div class="orderItems">
-                    <div class="item">
-                        <div class="productImg">
-                            <img src="/file/img/testImg.jpg" alt="">
-                        </div>
-                        <div class="productInfo">
-                            <div class="productName">테스트 상품</div>
-                            <div class="productOption">사이즈 : size</div>
-                            <div class="productAmount">가격 : XX,XXX원</div>
-                        </div>
-                        <div class="itemCount">X개</div>
-                    </div>
-                    <div class="item">
-                        <div class="productImg">
-                            <img src="/file/img/testImg.jpg" alt="">
-                        </div>
-                        <div class="productInfo">
-                            <div class="productName">테스트 상품</div>
-                            <div class="productOption">사이즈 : size</div>
-                            <div class="productAmount">가격 : XX,XXX원</div>
-                        </div>
-                        <div class="itemCount">X개</div>
-                    </div>
-                    <div class="item">
-                        <div class="productImg">
-                            <img src="/file/img/testImg.jpg" alt="">
-                        </div>
-                        <div class="productInfo">
-                            <div class="productName">테스트 상품</div>
-                            <div class="productOption">사이즈 : size</div>
-                            <div class="productAmount">가격 : XX,XXX원</div>
-                        </div>
-                        <div class="itemCount">X개</div>
-                    </div>
-                    <div class="item">
-                        <div class="productImg">
-                            <img src="/file/img/testImg.jpg" alt="">
-                        </div>
-                        <div class="productInfo">
-                            <div class="productName">테스트 상품</div>
-                            <div class="productOption">사이즈 : size</div>
-                            <div class="productAmount">가격 : XX,XXX원</div>
-                        </div>
-                        <div class="itemCount">X개</div>
-                    </div>
-                    <div class="item">
-                        <div class="productImg">
-                            <img src="/file/img/testImg.jpg" alt="">
-                        </div>
-                        <div class="productInfo">
-                            <div class="productName">테스트 상품</div>
-                            <div class="productOption">사이즈 : size</div>
-                            <div class="productAmount">가격 : XX,XXX원</div>
-                        </div>
-                        <div class="itemCount">X개</div>
-                    </div>
-                </div>
+                <div class="orderItems" id="orderItemList"></div>
             </div>
         </div>
     </div>
 </div>
 <th:block th:replace="~{/common/commonFooter}"></th:block>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const itemCheckBoxList = document.querySelectorAll(".itemCheckBox");
-
-        itemCheckBoxList.forEach(itemCheckBox => {
-            itemCheckBox.addEventListener('click', function () {
-                this.classList.toggle('checked');
-            });
-        })
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', async () => {
+        await myPage();
+        await orderDetail();
     })
+
+    const myPage = async () => {
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/user/myPage",
+            {},
+            (data) => {
+                document.querySelector('.leftSideTop .userName').innerText = data.userName + " 님";
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
+
+    const orderDetail = async () => {
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/user/myPage/order/" + [[${orderId}]],
+            {},
+            (data) => {
+                const orderId = document.getElementById("orderId");
+                const createdAt = document.getElementById("createdAt");
+                const orderAmount = document.getElementById("orderAmount");
+                const paymentAmount = document.getElementById("paymentAmount");
+                const paymentMethod = document.getElementById("paymentMethod");
+                const orderStatus = document.getElementById("orderStatus");
+                const orderItemList = document.getElementById("orderItemList");
+
+                orderId.innerText = data.orderId;
+                createdAt.innerText = data.createdAt;
+                orderAmount.innerText = data.orderAmount + "원";
+                paymentAmount.innerText = data.paymentAmount + "원";
+                paymentMethod.innerText = data.paymentMethod;
+                orderStatus.innerText = data.orderStatus;
+                orderItemList.innerHTML = data.orderItemList.map(item => {
+                    return`
+                        <div class="item">
+                            <div class="productImg">
+                                <img src="${item.productMainImg}" onerror="this.src='./file/img/300.png';" alt="">
+                            </div>
+                            <div class="productInfo">
+                                <div class="productName">${item.productName}</div>
+                                <div class="productAmount">가격 : ${item.productPrice}원</div>
+                            </div>
+                            <div class="itemCount">${item.quantity}개</div>
+                        </div>`
+                }).join("");
+            },
+            (err) => {
+                alert(err);
+            }
+        )
+    }
 </script>
 <th:block th:replace="~{/common/commonFoot}"></th:block>

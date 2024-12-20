@@ -1,0 +1,63 @@
+<th:block th:replace="~{/common/commonHead}"></th:block>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/productDetail.css">
+    <link rel="stylesheet" type="text/css" href="/css/quill.snow.css">
+</head>
+<body>
+<th:block th:replace="~{/common/commonHeader}"></th:block>
+<div class="mainContent">
+    <div class="product-detail-container">
+        <input type="hidden" id="productUID" th:value="${productUID}">
+        <div class="product-detail" style="border-bottom: 1px solid #777777;">
+            <!-- 상품 이미지 (왼쪽) -->
+            <div class="product-image">
+                <img src="" alt="상품 이미지">
+            </div>
+
+            <!-- 상품 정보 (오른쪽) -->
+            <div class="product-info">
+                <h1 class="product-title"></h1>
+                <p class="product-price"></p>
+
+                <div class="product-description"></div>
+                <!-- 버튼 영역 -->
+                <div class="button-group">
+                    <button class="add-to-cart-button">쇼핑카트에 담기</button>
+                    <button class="buy-now-button">지금 구매</button>
+                </div>
+            </div>
+        </div>
+        <div class="product-detail-area"></div>
+    </div>
+</div>
+<th:block th:replace="~{/common/commonFooter}"></th:block>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        await productDetail();
+    })
+
+    const productDetail = async () => {
+        const productUID = document.getElementById("productUID").value;
+
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + `/product/${productUID}`,
+            {},
+            (data) => {
+                const container = document.querySelector(".product-detail-container");
+
+                container.querySelector(".product-image img").src = data.productMainImg;
+                container.querySelector(".product-title").innerText = data.productName;
+                container.querySelector(".product-price").innerText = data.productPrice + "원";
+                container.querySelector(".product-description").innerText = data.productDescription;
+                container.querySelector(".product-detail-area").innerHTML = data.productDetail;
+
+                console.log(data);
+            },
+            (err) => {
+                alert(err.message)
+            });
+    }
+</script>
+<th:block th:replace="~{/common/commonFoot}"></th:block>

@@ -1,0 +1,105 @@
+.myPageContent {
+  display: grid;
+  gap: 15px;
+  margin: auto;
+  margin-top: 30px;
+  min-width: 900px;
+}
+.myPageContent[data-items="2"] {
+  grid-template-columns: 1fr 4fr;
+  width: 70%;
+}
+.myPageContent[data-items="3"] {
+  grid-template-columns: 1fr 4fr 2fr;
+  width: 80%;
+}
+.myPageContent .myPageLeftSideContent {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  height: -moz-min-content;
+  height: min-content;
+}
+.myPageContent .myPageLeftSideContent .leftSideTop {
+  border-bottom: #a5a5a5;
+}
+.myPageContent .myPageLeftSideContent .leftSideTop .userProfileImg {
+  width: 60%;
+  border: 1px solid #a5a5a5;
+  border-radius: 100px;
+  margin-top: 30px !important;
+  margin: auto;
+}
+.myPageContent .myPageLeftSideContent .leftSideTop .userProfileImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+}
+.myPageContent .myPageLeftSideContent .leftSideTop .userName {
+  width: 100%;
+  margin-top: 30px;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 22px;
+}
+.myPageContent .myPageLeftSideContent .line {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  border: 1px solid #a5a5a5;
+}
+.myPageContent .myPageLeftSideContent .leftSideMenuList {
+  color: #616161;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+}
+.myPageContent .myPageLeftSideContent .leftSideMenuList div {
+  padding: 10px;
+  width: 70%;
+  margin: auto;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+.myPageContent .myPageLeftSideContent .leftSideMenuList div:hover {
+  cursor: pointer;
+  border-color: #a5a5a5;
+}
+.myPageContent .myPageLeftSideContent .leftSideMenuList .selected {
+  color: #51ff00 !important;
+}
+.myPageContent .myPageRightSideContent {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  height: -moz-min-content;
+  height: min-content;
+}
+.myPageContent .myPageCenterContent {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+}
+
+.myPageCenterContent .line {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.myPageCenterContent .topContent {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 10px;
+}
+.myPageCenterContent .topContent .title {
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+}
+.myPageCenterContent .topContent .btnGroup {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row-reverse;
+}/*# sourceMappingURL=myPage.css.map */

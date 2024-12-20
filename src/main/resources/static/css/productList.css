@@ -1,0 +1,87 @@
+@charset "UTF-8";
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  /* 자동으로 열 크기 조정 */
+  gap: 20px;
+  padding: 20px;
+  max-width: 1400px;
+  /* 1400px 최대 너비로 설정 */
+  margin: 40px auto;
+  /* 상품 리스트가 가운데 오도록 */
+  justify-items: center;
+  /* 상품 카드를 중앙으로 정렬 */
+  box-sizing: border-box;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
+  /* 그리드에서 크기 맞추기 */
+  max-width: 330px;
+  /* 최대 크기 설정 */
+  margin: 0 auto;
+  /* 카드들을 화면 중앙에 정렬 */
+  box-sizing: border-box;
+  /* 패딩과 마진 포함하여 정확한 너비 */
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+}
+
+.product-card img {
+  width: 100%;
+  /* 이미지가 카드 크기에 맞게 */
+  height: 300px;
+  /* 이미지 크기 고정 */
+  -o-object-fit: cover;
+     object-fit: cover;
+  /* 이미지 비율 유지하면서 크기 맞추기 */
+  border-radius: 15px;
+}
+
+.product-card .product-info {
+  margin-top: 10px;
+}
+
+.product-card .product-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.product-card .product-price {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.product-card .actions {
+  display: flex;
+  justify-content: flex-end;
+  /* 버튼들을 오른쪽 끝에 배치 */
+  align-items: center;
+  margin-top: 10px;
+}
+
+.product-card .actions i {
+  margin-left: 15px;
+  transition: color 0.3s ease;
+  color: #ccc;
+}
+
+.product-card .actions .cart.active {
+  color: #000;
+  /* 장바구니 활성화 시 검은색 */
+}
+
+.product-card .actions .heart.active {
+  color: #e74c3c;
+  /* 찜하기 활성화 시 빨간색 */
+}/*# sourceMappingURL=productList.css.map */

@@ -1,61 +1,110 @@
 <th:block th:replace="~{/common/commonHead}"></th:block>
 <head>
-    <link type="text/css" rel="stylesheet" href="/css/mainBanner.css">
-    <link type="text/css" rel="stylesheet" href="/css/productBtn.css">
+    <link type="text/css" rel="stylesheet" href="/css/newMain.css">
+    <link type="text/css" rel="stylesheet" href="/css/banner.css">
+    <link type="text/css" rel="stylesheet" href="/css/productList.css">
     <script type="text/javascript" src="/js/slider.js"></script>
 </head>
 <body>
 <th:block th:replace="~{/common/commonHeader}"></th:block>
 <div class="mainContent">
-    <div class="bannerContainer">
-        <div class="bannerList">
-            <div class="bannerItem">
-                <img src="/file/img/testImg1.png" alt="">
+    <div class="banner">
+        <div class="banner-slider">
+            <div class="banner-images">
+                <div class="banner-image">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_002.jpg" alt="배너 1" class="banner-slide">
+                </div>
+                <div class="banner-image">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_003.jpg" alt="배너 2" class="banner-slide">
+                </div>
+                <div class="banner-image">
+                    <img src="https://pub-05783cad7c334e7d80c4d282b349f717.r2.dev/img/main_banner_001.jpg" alt="배너 3" class="banner-slide">
+                </div>
             </div>
-            <div class="bannerItem">
-                <img src="/file/img/testImg2.png" alt="">
-            </div>
-            <div class="bannerItem">
-                <img src="/file/img/testImg3.png" alt="">
-            </div>
-            <div class="bannerItem">
-                <img src="/file/img/testImg1.png" alt="">
-            </div>
-            <div class="bannerItem">
-                <img src="/file/img/testImg2.png" alt="">
-            </div>
-            <div class="bannerItem">
-                <img src="/file/img/testImg3.png" alt="">
-            </div>
+            <!-- 페이지네이션 -->
+            <div class="pagination"></div>
+            <!-- 네비게이션 화살표 -->
+            <div class="arrow left-arrow">&#10094;</div>
+            <div class="arrow right-arrow">&#10095;</div>
         </div>
-        <button class="prevButton"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="nextButton"><i class="fa-solid fa-chevron-right"></i></button>
-        <div class="pagination"></div>
     </div>
-    <div class="productList">
-        <div class="productItems">
-            <div class="productItem">
-                <div class="productImg">
-                    <img src="/file/img/testImg.jpg" alt="">
-                </div>
-                <div class="productInfo">
-                    <div class="productName">테스트상품</div>
-                    <div class="productPrice">10,000원</div>
-                    <div class="productBrand">OwO</div>
-                    <div class="productBtnGroup">
-                        <button class="shoppingCartBtn shoppingCartActive"><i class="fa-solid fa-cart-shopping"></i></button>
-                        <button class="wishBtn wishActive"><i class="fa-solid fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="pagination">
-            <button>
-                <i class="fa-solid fa-plus fa-xl"></i>
-            </button>
-        </div>
+
+    <!-- 상품 리스트 -->
+    <div class="product-grid">
     </div>
 </div>
 <th:block th:replace="~{/common/commonFooter}"></th:block>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        await productList();
+    })
+
+    // 배너 초기화
+    const bannerSlider = new BannerSlider('.banner-slider', {
+        autoplayInterval: 10000,
+        loop: true,
+    });
+
+    const productList = async (page = 1) => {
+        await apiRequest(
+            HttpMethod.GET,
+            API_URL + "/product/list",
+            {},
+            (data) => {
+                document.querySelector('.product-grid').innerHTML += data.map(product => {
+                    return `
+                        <div class="product-card">
+                            <img src="${product.productMainImg}" alt="상품 1" onerror="this.src='./file/img/300.png';" onclick="moveToPage('/product/${product.productUID}')">
+                            <div class="product-info">
+                                <div class="product-name">${product.productName}</div>
+                                <div class="product-price">₩${product.productPrice}</div>
+                            </div>
+                            <div class="actions">
+                                <i class="fa-solid fa-cart-shopping cart ${product.shoppingCart ? 'active' : ''}" onclick="toggleCart(${product.productUID})"></i>
+                                <i class="fas fa-heart heart ${product.wishList ? 'active' : ''}" onclick="toggleHeart(${product.productUID})"></i>
+                            </div>
+                        </div>`;
+                }).join('');
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
+
+    const toggleCart = async (productUID) => {
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/user/shoppingCart",
+            {
+                productUID: productUID,
+            },
+            (data) => {
+                alert(data);
+                location.reload();
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
+
+    const toggleHeart = async (productUID) => {
+        await apiRequest(
+            HttpMethod.POST,
+            API_URL + "/user/wish",
+            {
+                productUID: productUID,
+            },
+            (data) => {
+                alert(data);
+                location.reload();
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
+</script>
 <th:block th:replace="~{/common/commonFoot}"></th:block>
